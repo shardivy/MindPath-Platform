@@ -326,7 +326,7 @@ const lastName = values.lastName || "";
             <Col xs={24} md={14} style={{ padding: "48px 40px", background: "#fff", borderRadius: "0 24px 24px 0" }}>
               {/* LOGO + TITLE */}
                     <div style={{ marginBottom: 16 }}>
-                <img
+                {/* <img
                   src="/Abhinav-logo.jpg"
                   alt="Career Counselling"
                   style={{
@@ -335,7 +335,7 @@ const lastName = values.lastName || "";
                     objectFit: "contain",
                     marginBottom: 6,
                   }}
-                />
+                /> */}
 
                 <div
                   style={{

@@ -120,7 +120,7 @@ const Program = () => {
     if (programScrollRef.current) programScrollRef.current.scrollBy({ left: 250, behavior: "smooth" });
   };
 
-    const serviceRouteMap = {
+  const serviceRouteMap = {
     "Engineering-Paid Whatsapp Group":
       "/engineering-paid-group-service",
 
@@ -175,7 +175,7 @@ const Program = () => {
     "Aptitude Test Counselling-Aptitude Test Of 11th-12th STD":
       "/11-12-aptitude-service",
 
-        "Aptitude Test Counselling-PG Counselling":
+    "Aptitude Test Counselling-PG Counselling":
       "/pg-counselling-service",
 
 
@@ -475,7 +475,7 @@ const Program = () => {
                               flexDirection: screens.xs ? "column" : "row",
                             }}
                           >
-                         <Button
+                            {/* <Button
   block
   onClick={() => {
     const routeKey = `${selectedProgram}-${pkg.name}`;
@@ -496,7 +496,16 @@ const Program = () => {
   }}
 >
   Learn More
-</Button>
+</Button> */}
+
+                            <Button
+                              block
+                              onClick={() => {
+                                window.location.hash = "learn-more";
+                              }}
+                            >
+                              Learn More
+                            </Button>
 
                             <Button
                               type="primary"
@@ -732,20 +741,18 @@ const Program = () => {
                             }}
                           >
                             {/* Learn More Button */}
-                            {/* <Button
-    block
-    onClick={() => {
-      if (pkg.link_url) {
-        window.open(pkg.link_url, "_blank", "noopener,noreferrer");
-      } else {
-        window.location.href = "https://abhinavcareerscope.com/";
-      }
-    }}
-  >
-    Learn More
-  </Button> */}
 
-<Button
+
+                            <Button
+                              block
+                              onClick={() => {
+                                window.location.hash = "learn-more";
+                              }}
+                            >
+                              Learn More
+                            </Button>
+
+                            {/* <Button
   block
   onClick={() => {
     const routeKey = `${selectedProgram}-${pkg.name}`;
@@ -766,7 +773,7 @@ const Program = () => {
   }}
 >
   Learn More
-</Button>
+</Button> */}
 
                             {/* Select / Selected Button */}
                             {profile?.package_id === pkg.id ? (

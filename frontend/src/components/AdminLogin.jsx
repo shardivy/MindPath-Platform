@@ -210,7 +210,7 @@ const AdminLogin = () => {
             >
               {/* LOGO */}
               <div style={{ marginBottom: 20 }}>
-                <img
+                {/* <img
                   src="/Abhinav-logo.jpg"
                   alt="Career Counselling"
                   style={{
@@ -219,7 +219,7 @@ const AdminLogin = () => {
                     objectFit: "contain",
                     marginBottom: 6,
                   }}
-                />
+                /> */}
 
                 <div
                   style={{
@@ -317,7 +317,7 @@ const AdminLogin = () => {
 
                 <Divider style={{ margin: "28px 0" }} />
 
-                <Text style={{ textAlign: "center", display: "block" }}>
+                {/* <Text style={{ textAlign: "center", display: "block" }}>
                   Want to watch video?{" "}
                   <Text
                     type="primary"
@@ -331,7 +331,7 @@ const AdminLogin = () => {
                   >
                     Click here
                   </Text>
-                </Text>
+                </Text> */}
 
                 <Text style={{ textAlign: "center", display: "block" }}>
                   Don’t have an student account?{" "}
