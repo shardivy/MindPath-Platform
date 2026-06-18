@@ -215,7 +215,7 @@ useEffect(() => {
                     color: adminTheme.token.colorTextPrimary,
                   }}
                 >
-                  Career Counselling
+                TrueMindPath
                 </div>
 
                 <div
@@ -272,7 +272,7 @@ useEffect(() => {
                 {/* <img src="/Abhinav-logo.jpg" width={60} /> */}
                 <div>
                   <div style={{ fontWeight: 700, color: "#fff" }}>
-                    Career Counselling
+                   TrueMindPath
                   </div>
                   <div style={{ fontSize: 11, color: "#fff" }}>
                     Handholding Panel

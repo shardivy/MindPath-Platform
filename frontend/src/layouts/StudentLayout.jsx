@@ -184,10 +184,10 @@ export default function StudentLayout() {
     "/student/dashboard": "Dashboard",
     "/student/program": "Program & Services",
     "/student/exam-management": "Aptitude Test Management",
-    "/student/report-management": "Aptitude Test Report",
-    "/student/slot-booking": "Counselling Slot Booking",
+    "/student/report-management": "Assessment Reports",
+    "/student/slot-booking": "Book Appointment",
     "/student/freecontent": "Free Content",
-    "/student/content-library": "Content Library",
+    "/student/content-library": "Career Library",
     "/student/student-profile": "Profile",
     "/student/payments": "Payments",
     "/student/payment-page": "Payment",
@@ -239,7 +239,7 @@ export default function StudentLayout() {
   const contentLibraryItem = {
     key: "/student/content-library",
     icon: <BookFilled />,
-    label: "Content Library",
+    label: "Career Library",
     onClick: () => {
       navigate("/student/content-library");
       setDrawerVisible(false);
@@ -314,8 +314,8 @@ export default function StudentLayout() {
                 icon: <ScheduleFilled />,
                 label: (
                   <div style={{ lineHeight: "20px" }}>
-                    <div>Counselling</div>
-                    <div>Slot Booking</div>
+                    <div>Book Appointment</div>
+                    {/* <div>Slot Booking</div> */}
                   </div>
                 ),
                 onClick: () => {
@@ -336,8 +336,8 @@ export default function StudentLayout() {
           icon: <FileTextFilled />,
           label: (
             <div style={{ lineHeight: "20px" }}>
-              <div>Aptitude Test</div>
-              <div>Reports</div>
+              <div>Assessment Reports</div>
+              {/* <div>Reports</div> */}
             </div>
           ),
           onClick: () => {
@@ -377,8 +377,8 @@ export default function StudentLayout() {
                 icon: <ScheduleFilled />,
                 label: (
                   <div style={{ lineHeight: "20px" }}>
-                    <div>Counselling</div>
-                    <div>Slot Booking</div>
+                    <div>Book Appointment</div>
+                    {/* <div>Slot Booking</div> */}
                   </div>
                 ),
                 onClick: () => {
@@ -531,7 +531,7 @@ export default function StudentLayout() {
                     lineHeight: "24px",
                   }}
                 >
-                  Career Counselling
+                 TrueMindPath
                 </div>
 
                 {/* SUBTITLE */}
@@ -612,7 +612,7 @@ export default function StudentLayout() {
                     lineHeight: "20px",
                   }}
                 >
-                  Career Counselling
+                  TrueMindPath
                 </div>
 
                 {/* SUBTITLE */}

@@ -159,8 +159,8 @@ const AdminLayout = () => {
     "/s-admin/enquiry-leads": "Enquiry & Leads",
     "/s-admin/users": "Users",
     "/s-admin/programs": "Programs & Services",
-    "/s-admin/exams": "Exams",
-    "/s-admin/reportsmanagement": "Report Management",
+    "/s-admin/exams": "Career Assessment Management",
+    "/s-admin/reportsmanagement": "Assessment Reports",
     "/s-admin/paymentmanagement": "Payment Management",
     "/s-admin/slotbooking": "Counselling Bookings",
     "/s-admin/createslot": "Create Counselling Slot ",
@@ -180,7 +180,7 @@ const AdminLayout = () => {
     "/s-admin/uiux-dashboard": "Dashboard",
     "/s-admin/sessions-history": "Session History",
 
-    "/s-admin/hhManagement": "Handholding Management",
+    "/s-admin/hhManagement": "Career Analyst Certification",
 
     "/s-admin/eventOutreach": "Event Outreach Management",
     "/s-admin/advertisement": "Advertisement Management",
@@ -344,7 +344,7 @@ const AdminLayout = () => {
       icon: <CalendarFilled />,
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Aptitude Test</div>
+          <div>Career Assessment</div>
           <div>Management</div>
         </div>
       ),
@@ -361,8 +361,8 @@ const AdminLayout = () => {
       icon: <FileTextFilled />,
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Aptitude Test</div>
-          <div>Reports</div>
+          <div>Assessment Reports</div>
+          {/* <div>Reports</div> */}
         </div>
       ),
       onClick: () => {
@@ -442,8 +442,8 @@ const AdminLayout = () => {
       icon: <SolutionOutlined />, // you can change icon
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Handholding</div>
-          <div>Management</div>
+          <div>Career Analyst </div>
+          <div>Certification</div>
         </div>
       ),
       onClick: () => {
@@ -455,7 +455,7 @@ const AdminLayout = () => {
 
 
 
-        (role === "admin" || role === "superadmin") && {
+    (role === "admin" || role === "superadmin") && {
       key: "/s-admin/eventOutreach",
       icon: <CalendarFilled />, // you can change icon
       label: (
@@ -474,22 +474,22 @@ const AdminLayout = () => {
 
 
 
-// ✅ Advertisement Menu Item
-(role === "admin" || role === "superadmin") && {
-  key: "/s-admin/advertisement",
-  icon: <NotificationFilled />,
-  label: (
-    <div style={{ lineHeight: "20px" }}>
-      <div>Advertisement</div>
-      <div>Management</div>
-    </div>
-  ),
-  onClick: () => {
-    navigate("/s-admin/advertisement");
-    setDrawerVisible(false);
-  },
-  style: { marginBottom: 12 },
-},
+    // ✅ Advertisement Menu Item
+    (role === "admin" || role === "superadmin") && {
+      key: "/s-admin/advertisement",
+      icon: <NotificationFilled />,
+      label: (
+        <div style={{ lineHeight: "20px" }}>
+          <div>Advertisement</div>
+          <div>Management</div>
+        </div>
+      ),
+      onClick: () => {
+        navigate("/s-admin/advertisement");
+        setDrawerVisible(false);
+      },
+      style: { marginBottom: 12 },
+    },
 
     // (role === "admin" || role === "superadmin") &&
     //   {
@@ -693,7 +693,7 @@ const AdminLayout = () => {
                     lineHeight: "24px",
                   }}
                 >
-                  Career Counselling
+                  TrueMindPath
                 </div>
 
                 {/* SUBTITLE */}
@@ -788,7 +788,7 @@ const AdminLayout = () => {
                       lineHeight: "18px",
                     }}
                   >
-                    Career Counselling
+                    TrueMindPath
                   </div>
 
                   <div
