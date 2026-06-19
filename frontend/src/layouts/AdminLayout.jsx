@@ -157,7 +157,7 @@ const AdminLayout = () => {
     "/s-admin/profile": "Profile",
     "/s-admin/dashboard": "Dashboard",
     "/s-admin/enquiry-leads": "Enquiry & Leads",
-    "/s-admin/users": "Users",
+    "/s-admin/users": "Clients Enrolled",
     "/s-admin/programs": "Programs & Services",
     "/s-admin/exams": "Career Assessment Management",
     "/s-admin/reportsmanagement": "Assessment Reports",
@@ -270,7 +270,7 @@ const AdminLayout = () => {
     (role === "admin" || role === "superadmin" || role === "lead_counsellor") && {
       key: "/s-admin/users",
       icon: <TeamOutlined />,
-      label: "Students Enrolled",
+      label: "Clients Enrolled",
       onClick: () => {
         navigate("/s-admin/users");
         setDrawerVisible(false);

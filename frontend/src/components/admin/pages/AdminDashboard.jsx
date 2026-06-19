@@ -75,7 +75,7 @@ useEffect(() => {
       icon: <FileTextOutlined />,
     },
     {
-      title: "Registered Students",
+      title: "Registered Clients",
       value: dashboardStats?.students?.registered_students || 0,
       icon: <TeamOutlined />,
     },

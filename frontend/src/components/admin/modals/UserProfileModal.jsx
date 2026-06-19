@@ -113,13 +113,13 @@ const UserProfileModal = ({ open, onClose, user }) => {
         footer={null}
         width={1000}
         centered
-        title={<Title level={4} style={{ margin: 0 }}>User Profile</Title>}
+        title={<Title level={4} style={{ margin: 0 }}>Client Profile</Title>}
       >
         <div style={{ maxHeight: "85vh", overflowY: "auto", paddingRight: 8 }}>
           {/* ================= DETAILS ================= */}
           <Row gutter={24}>
             <Col xs={24} md={12}>
-              <Title level={5}>Student Details</Title>
+              <Title level={5}>Client Details</Title>
               <Descriptions bordered column={1}>
                 <Descriptions.Item label="Name">{displayName}</Descriptions.Item>
                 <Descriptions.Item label="Email">{user.email}</Descriptions.Item>

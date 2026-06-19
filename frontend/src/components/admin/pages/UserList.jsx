@@ -531,7 +531,7 @@ const UserList = () => {
       <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
         <Col>
           {/* <Title level={3}>User Lists</Title> */}
-          <Title level={3}>Students Enrolled</Title>
+          <Title level={3}>Clients Enrolled</Title>
         </Col>
         <Col>
           <Space>
@@ -544,7 +544,7 @@ const UserList = () => {
               icon={<PlusOutlined />}
               onClick={handleAddUser}
             >
-              Add Student
+              Add Client
             </Button>
           </Space>
         </Col>
