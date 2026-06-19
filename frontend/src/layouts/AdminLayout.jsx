@@ -480,7 +480,7 @@ const AdminLayout = () => {
       icon: <NotificationFilled />,
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Advertisement</div>
+          <div>Collaboration</div>
           <div>Management</div>
         </div>
       ),
