@@ -159,7 +159,7 @@ const AdminLayout = () => {
     "/s-admin/enquiry-leads": "Enquiry & Leads",
     "/s-admin/users": "Clients Enrolled",
     "/s-admin/programs": "Programs & Services",
-    "/s-admin/exams": "Career Assessment Management",
+    "/s-admin/exams": "Assessment Management",
     "/s-admin/reportsmanagement": "Assessment Reports",
     "/s-admin/paymentmanagement": "Payment Management",
     "/s-admin/slotbooking": "Counselling Bookings",
@@ -167,7 +167,7 @@ const AdminLayout = () => {
     "/s-admin/scheduler": "Scheduler",
     "/s-admin/followupManagement": "Follow Up Management",
     "/s-admin/contentManagement": "Content Management",
-    "/s-admin/examManagements": "Career Assessment Management",
+    "/s-admin/examManagements": "Assessment Management",
     "/s-admin/examlist": "Exam List",
     "/s-admin/employeeList": "User List",
     "/s-admin/notificationManagement": "Notification Management",
@@ -180,7 +180,7 @@ const AdminLayout = () => {
     "/s-admin/uiux-dashboard": "Dashboard",
     "/s-admin/sessions-history": "Session History",
 
-    "/s-admin/hhManagement": "Career Analyst Certification",
+    "/s-admin/hhManagement": "Train the Trainer",
 
     "/s-admin/eventOutreach": "Event Outreach Management",
     "/s-admin/advertisement": "Collaboration Management",
@@ -344,7 +344,7 @@ const AdminLayout = () => {
       icon: <CalendarFilled />,
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Career Assessment</div>
+          <div>Assessment</div>
           <div>Management</div>
         </div>
       ),
@@ -442,8 +442,8 @@ const AdminLayout = () => {
       icon: <SolutionOutlined />, // you can change icon
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Career Analyst </div>
-          <div>Certification</div>
+          <div>Train the Trainer </div>
+          {/* <div>Certification</div> */}
         </div>
       ),
       onClick: () => {

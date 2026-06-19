@@ -464,8 +464,7 @@ const ExamManagements = () => {
 
   return (
     <div style={{ padding: 16 }}>
-      <Title level={3}>Career Assessment
-Management</Title>
+      <Title level={3}> Assessment Management</Title>
 
       <Card
         style={{
