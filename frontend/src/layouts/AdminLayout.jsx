@@ -167,7 +167,7 @@ const AdminLayout = () => {
     "/s-admin/scheduler": "Scheduler",
     "/s-admin/followupManagement": "Follow Up Management",
     "/s-admin/contentManagement": "Content Management",
-    "/s-admin/examManagements": "User Request List",
+    "/s-admin/examManagements": "Career Assessment Management",
     "/s-admin/examlist": "Exam List",
     "/s-admin/employeeList": "User List",
     "/s-admin/notificationManagement": "Notification Management",
@@ -183,7 +183,7 @@ const AdminLayout = () => {
     "/s-admin/hhManagement": "Career Analyst Certification",
 
     "/s-admin/eventOutreach": "Event Outreach Management",
-    "/s-admin/advertisement": "Advertisement Management",
+    "/s-admin/advertisement": "Collaboration Management",
 
 
 

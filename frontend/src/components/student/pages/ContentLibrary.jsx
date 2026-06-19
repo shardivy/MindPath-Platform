@@ -211,7 +211,7 @@ const transformedData =
     <div style={{ padding: "20px 0px" }}>
       {/* HEADER */}
       <div style={{ textAlign: "center", marginBottom: 32 }}>
-        <Title level={2}>Content Library</Title>
+        <Title level={2}>Career Library</Title>
         <Text type="colorTextSecondary">
           Explore free and premium learning resources
         </Text>

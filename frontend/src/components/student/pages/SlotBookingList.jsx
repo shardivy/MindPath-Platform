@@ -230,7 +230,7 @@ const isReportAvailable =
       >
         <Col span={24} style={{ textAlign: "center", marginBottom: 16 }}>
           <Title level={2} style={{ margin: 0 }}>
-            My Counselling Sessions
+            My Appointments
           </Title>
           <Text type="colorTextSecondary">
             <br />

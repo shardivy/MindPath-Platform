@@ -107,7 +107,7 @@ const ExamManagement = () => {
       <div style={{ minHeight: "100vh" }}>
         {/* HEADER */}
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <Title level={2}>Career Assessment Test</Title>
+          <Title level={2}>Career Assessment</Title>
           <Text type="colorTextSecondary">
             Discover your strengths, interests, and ideal career path
           </Text>

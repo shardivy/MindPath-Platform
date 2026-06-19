@@ -183,7 +183,7 @@ export default function StudentLayout() {
   const breadcrumbNameMap = {
     "/student/dashboard": "Dashboard",
     "/student/program": "Program & Services",
-    "/student/exam-management": "Aptitude Test Management",
+    "/student/exam-management": "Career Assessment",
     "/student/report-management": "Assessment Reports",
     "/student/slot-booking": "Book Appointment",
     "/student/freecontent": "Free Content",
@@ -295,8 +295,8 @@ export default function StudentLayout() {
           icon: <CalendarFilled />,
           label: (
             <div style={{ lineHeight: "20px" }}>
-              <div>Aptitude Test</div>
-              <div>Management</div>
+              <div>Career Assessment</div>
+              {/* <div>Management</div> */}
             </div>
           ),
           onClick: () => {

@@ -211,7 +211,8 @@ const filteredData = data.filter((item) => {
       {/* HEADER */}
       <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
         <Col>
-          <Title level={3}>Advertisement Management</Title>
+          <Title level={3}>Collaboration
+Management</Title>
         </Col>
 
         <Col>
@@ -224,7 +225,7 @@ const filteredData = data.filter((item) => {
               setIsModalOpen(true);
             }}
           >
-            Add Advertisement
+            Add Collaboration
           </Button>
         </Col>
       </Row>

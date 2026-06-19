@@ -41,7 +41,7 @@ const Welcome = () => {
           letterSpacing: '0.5px'
         }}
       >
-        Welcome to Abhinav Career Counselling - Your Pathway to Success
+        Welcome to TrueMindPath - Your Pathway to healing and growth!
       </Title><br></br>
 
 
@@ -59,8 +59,8 @@ const Welcome = () => {
             }}
           >
             <img
-              src="/abhinav-img.jpeg"
-              alt="Abhinav Career Counselling"
+              src="/Soulspring.jpg"
+              alt="TrueMindPath"
               style={{
                 width: "100%",
                 height: "auto",
@@ -110,18 +110,18 @@ const Welcome = () => {
           </div>
         </Col> */}
 
-  {/* Button */}
-  <Col
-    xs={24}
-    md={5}
-    style={{
-      display: 'flex',
-      justifyContent: 'center'
-    }}
-  >
-    <Button
-      size="large"
-      icon={<RocketOutlined />}
+        {/* Button */}
+        <Col
+          xs={24}
+          md={5}
+          style={{
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <Button
+            size="large"
+            icon={<RocketOutlined />}
             onClick={() =>
               navigate("/welcome-enquiry", { state: { from: "enquiry" } })
             }
@@ -133,15 +133,15 @@ const Welcome = () => {
               padding: screens.xs ? '0 20px' : '0 25px',
               height: '44px',
               fontWeight: '600',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '8px',
-        width: screens.xs ? '100%' : 'auto',
-        margin: screens.xs ? '0' : '0 auto',
-        boxShadow: '0 6px 15px rgba(22,119,255,0.35)',
-        transition: 'all 0.3s ease'
-      }}
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              width: screens.xs ? '100%' : 'auto',
+              margin: screens.xs ? '0' : '0 auto',
+              boxShadow: '0 6px 15px rgba(22,119,255,0.35)',
+              transition: 'all 0.3s ease'
+            }}
             onMouseOver={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px)';
               e.currentTarget.style.boxShadow =

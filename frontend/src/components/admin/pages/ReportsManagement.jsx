@@ -452,7 +452,7 @@ const ReportsManagement = () => {
 
   return (
     <div style={{ padding: 16 }}>
-      <Title level={3}>Report Management</Title>
+      <Title level={3}>Assessment Reports</Title>
 
       {/* ----------------- STATS ----------------- */}
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>

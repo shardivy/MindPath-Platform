@@ -1031,7 +1031,7 @@ const handleSendReminder = (record) => {
       <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
         <Col span={24}>
           <Title level={3} style={{ marginBottom: 0 }}>
-            Handholding Management
+         Career Analyst Certification
           </Title>
         </Col>
       </Row>
