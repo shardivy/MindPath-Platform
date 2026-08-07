@@ -7,8 +7,8 @@ const axiosInstance = axios.create({
   // baseURL: "https://son-functions-ray-wins.trycloudflare.com/api",
 
   // baseURL: "https://cms.abhinavcareerscope.com/api",       // this is for abhinavcareerscope
-    baseURL: "https://careerscope.ramsolutions.in/api",       // this is for ramsolutions
-    // baseURL: "https://truemindpath.ramsolutions.in/api",   // this is for mindpath
+    // baseURL: "https://careerscope.ramsolutions.in/api",       // this is for ramsolutions
+    baseURL: "https://truemindpath.ramsolutions.in/api",   // this is for mindpath
 
 
 });
