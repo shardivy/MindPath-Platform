@@ -81,16 +81,16 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
   const isView = modalMode === "view";
   const isEdit = modalMode === "edit";
 
-  // const [classOptions] = useState([
-  //  "School",
-  // "Secondary School",
-  // "Higher Secondary School",
-  // "Undergraduate",
-  // "Graduate",
-  // "Postgraduate",
-  // "Others",
+  const [classOptions] = useState([
+   "School",
+  "Secondary School",
+  "Higher Secondary School",
+  "Undergraduate",
+  "Graduate",
+  "Postgraduate",
+  "Others",
   
-  // ]);
+  ]);
 
   const selectedPackage = packages.find((p) => p.id === liveValues?.package);
   const totalPackageAmount = selectedPackage?.amount || selectedPackage?.price || selectedPackage?.total_amount || "";
@@ -409,13 +409,11 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                 <Col xs={24} md={12}>
                   <Form.Item name="study_class" label="Qualification" rules={isView ? [] : classRules}>
                     <Select disabled={isView} placeholder="Select qualification">
-                       <Option value="school">School</Option>
-  <Option value="secondary_school">Secondary School</Option>
-  <Option value="higher_secondary">Higher Secondary School</Option>
-  <Option value="undergraduate">Undergraduate</Option>
-  <Option value="graduate">Graduate</Option>
-  <Option value="postgraduate">Postgraduate</Option>
-  <Option value="others">Others</Option>
+                      {classOptions.map((cls) => (
+                        <Option key={cls} value={cls}>
+                          {cls}
+                        </Option>
+                      ))}
                     </Select>
                   </Form.Item>
                 </Col>
