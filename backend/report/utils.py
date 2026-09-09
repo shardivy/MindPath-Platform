@@ -152,7 +152,7 @@ ________________________________________
 ________________________________________
 
 Best Regards,
-Abhinav Career Scope
+TheCareerFront
 """
 
     send_mail(

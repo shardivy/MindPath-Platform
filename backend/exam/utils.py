@@ -84,10 +84,10 @@ ________________________________________
 For any queries or assistance, feel free to contact:
 
 Call / WhatsApp:
-+91 99226 95424 | +91 82080 30557
++91 84849 05526 | +91 84849 06643
 
 Best Regards,
-Abhinav Career Scope
+TheCareerFront
 """
 
     send_mail(
@@ -129,10 +129,10 @@ This usually happens if:
 
 Please log in to your student portal and complete the remaining steps for your exam.
 
-If you need assistance, feel free to contact our support team.
+If you need assistance, feel free to contact our team.
 
 Best Regards  
-Support Team
+TheCareerFront
 """
 
     send_mail(
