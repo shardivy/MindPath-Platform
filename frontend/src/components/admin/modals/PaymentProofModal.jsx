@@ -529,12 +529,12 @@ const PaymentProofModal = ({ open, onClose, data, onSuccess }) => {
             {/* Student + Package */}
             <Row gutter={16}>
               <Col xs={24} md={12}>
-                <Form.Item label="Student Name" name="name">
+                <Form.Item label="Client Name" name="name">
                   <Input />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
-                <Form.Item label="Counselling Service" name="package">
+                <Form.Item label="Treatment" name="package">
                   <Input />
                 </Form.Item>
               </Col>
@@ -575,16 +575,16 @@ const PaymentProofModal = ({ open, onClose, data, onSuccess }) => {
             </Row>
           </Form>
         ) : (
-          <>
+          <>  
             {/* ONLY THIS SHOULD EXIST IN VIEW MODE */}
             <Row gutter={16}>
               <Col xs={24} md={12}>
-                <Text style={labelStyle}>Student Name</Text>
+                <Text style={labelStyle}>Client Name</Text>
                 <div style={valueBoxStyle}>{safeData.name}</div>
               </Col>
 
               <Col xs={24} md={12}>
-                <Text style={labelStyle}>Counselling Service</Text>
+                <Text style={labelStyle}>Treatment</Text>
                 <div style={valueBoxStyle}>
                   {safeData.package && safeData.package !== "-"
                     ? safeData.package.charAt(0).toUpperCase() +

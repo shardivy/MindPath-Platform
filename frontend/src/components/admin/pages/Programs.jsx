@@ -147,13 +147,13 @@ const handleDeleteLanding = async (record) => {
 
   const statsCards = [
     {
-      title: "Total Programs",
+      title: "Total Therapies",
       value: stats?.total_programs || 0,
       icon: <ReadOutlined />,
       tabKey: "programs",
     },
     {
-      title: "Total Counselling Services",
+      title: "Total Treatments",
       value: stats?.total_packages || 0,
       icon: <BookOutlined />,
       tabKey: "packages",
@@ -178,7 +178,7 @@ const handleDeleteLanding = async (record) => {
         (currentPage - 1) * pageSize + index + 1,
     },
     {
-      title: "Program Name",
+      title: "Therapy Name",
       dataIndex: "name",
       render: (t) => <Text strong>{t}</Text>,
     },
@@ -253,7 +253,7 @@ const handleDeleteLanding = async (record) => {
         (currentPage - 1) * pageSize + index + 1,
     },
     {
-      title: "Counselling Service Name",
+      title: "Treatment Name",
       dataIndex: "name",
       render: (text) => {
         if (!text) return "-";
@@ -562,7 +562,7 @@ const finalFilteredData = filteredData.filter((i) =>
 
   return (
     <div style={{ padding: screens.md ? 24 : 12 }}>
-      <Title level={3}>Programs & Counselling Services</Title>
+      <Title level={3}>Therapies & Treatments</Title>
 
       {/* STATS */}
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
@@ -602,9 +602,9 @@ const finalFilteredData = filteredData.filter((i) =>
             activeKey={activeTab}
             onChange={setActiveTab}
             items={[
-              { key: "programs", label: "Programs" },
-              { key: "packages", label: "Counselling Services" },
-              { key: "landing", label: "Landing Pages" },
+              { key: "programs", label: "Therapy" },
+              { key: "packages", label: "Treatments" },
+              // { key: "landing", label: "Landing Pages" },
             ]}
           />
         </Col>
@@ -623,9 +623,9 @@ const finalFilteredData = filteredData.filter((i) =>
             }}
           >
             Create  {activeTab === "packages"
-    ? "Counselling Service"
+    ? "Treatment"
     : activeTab === "programs"
-    ? "Program"
+    ? "Therapy"
     : "Landing Page"} 
           </Button>
         </Col>
@@ -638,9 +638,9 @@ const finalFilteredData = filteredData.filter((i) =>
         <Col>
           <Title level={5} style={{ margin: 10 }}>
   {activeTab === "packages"
-    ? `Counselling Service Records (${filteredData.length})`
+    ? `Treatment Records (${filteredData.length})`
     : activeTab === "programs"
-    ? `Program Records (${filteredData.length})`
+    ? `Therapy Records (${filteredData.length})`
     : `Landing Page Records (${filteredData.length})`} {/* ✅ */}
 </Title>
         </Col>

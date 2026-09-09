@@ -121,15 +121,15 @@ const UserList = () => {
       "Sr. No": index + 1,
       "Name": `${user.first_name || ""} ${user.last_name || ""}`,
       "Email": user.email,
-      "Program": user.program,
-      "Counselling Service": user.package,
-      "Preferred Counselling Mode": user.preferred_counselling_mode,
+      "Therapy ": user.program,
+      "Treatment": user.package,
+      "Preferred Session Mode": user.preferred_counselling_mode,
       "Payment Status": user.paymentStatus,
       "Payment Amount": user.total_paid_amount,
-      "Exam Status": user.examStatus,
-      "Report Status": user.reportStatus,
+      "Assessment Status": user.examStatus,
+      "Assessment Report Status": user.reportStatus,
       // "Review": user.review || "-",
-      "Slot Status": user.slotStatus || "-",
+      "Session Status": user.slotStatus || "-",
       "Journey Status": user.journeyStatus || "-",
       "Questionnaire Status": user.analysis_status || "-",
 
@@ -149,7 +149,7 @@ const UserList = () => {
     );
 
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "User List");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Client List");
 
     const excelBuffer = XLSX.write(workbook, {
       bookType: "xlsx",
@@ -161,7 +161,7 @@ const UserList = () => {
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
     });
 
-    saveAs(fileData, `User List Report.xlsx`);
+    saveAs(fileData, `Client List Report.xlsx`);
   };
 
 
@@ -190,7 +190,7 @@ const UserList = () => {
     },
 
     {
-      title: "Program / Counselling Service ",
+      title: "Therapy / Treatment",
       width: 180,
       key: "program",
       render: (_, record) => (
@@ -202,7 +202,7 @@ const UserList = () => {
       ),
     },
     {
-      title: "Preferred Counselling Mode",
+      title: "Preferred Session Mode",
       dataIndex: "preferred_counselling_mode",
       width: 150,
       render: (mode) => {
@@ -242,7 +242,7 @@ const UserList = () => {
       },
     },
     {
-      title: "Exam Status",
+      title: "Assessment Status",
       dataIndex: "examStatus",
       key: "examStatus",
       render: (status) => {
@@ -397,7 +397,7 @@ const UserList = () => {
     //   render: (text) => text ? text : " - ",
     // },
     {
-      title: "Counselling Booking Status",
+      title: "Session Booking Status",
       dataIndex: "slotStatus",
       key: "slotStatus",
       width: 100,
@@ -563,7 +563,7 @@ const UserList = () => {
           {/* Search */}
           <Col xs={24} sm={24} md={8}>
             <Input
-              placeholder="Search user or program..."
+              placeholder="Search user or therapy..."
               prefix={<SearchOutlined />}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
@@ -589,7 +589,7 @@ const UserList = () => {
           {/* Exam Status */}
           <Col xs={12} sm={12} md={4}>
             <Select
-              placeholder="Exam Status"
+              placeholder="Assessment Status"
               value={examFilter}
               onChange={setExamFilter}
               allowClear
@@ -603,7 +603,7 @@ const UserList = () => {
           {/* Slot Status */}
           <Col xs={12} sm={12} md={4}>
             <Select
-              placeholder="Slot Status"
+              placeholder="Session Status"
               value={slotFilter}
               onChange={setSlotFilter}
               allowClear

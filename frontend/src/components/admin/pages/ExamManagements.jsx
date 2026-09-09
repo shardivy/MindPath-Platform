@@ -361,7 +361,7 @@ const ExamManagements = () => {
         (currentPage - 1) * pageSize + index + 1,
     },
     {
-      title: "User Name",
+      title: "Client Name",
       render: (_, record) => (
         <Space direction="vertical" size={0}>
           <Text strong>{record.userName}</Text>
@@ -371,7 +371,7 @@ const ExamManagements = () => {
     },
     // { title: "Program", dataIndex: "program" },
     {
-      title: "Program / Counselling Service",
+      title: "Therapy / Treatment",
       width: 250,
       render: (_, record) => (
         <div>
@@ -384,7 +384,7 @@ const ExamManagements = () => {
       ),
     },
 
-    { title: "Exam Status", dataIndex: "status", render: renderStatus },
+    { title: "Assessment Status", dataIndex: "status", render: renderStatus },
     {
       title: "Actions",
       render: (_, record) => (
@@ -447,7 +447,7 @@ const ExamManagements = () => {
         </Space>
       ),
     },
-    { title: "Exam Completion Date", dataIndex: "completedDate" },
+    { title: "Assessment Completion Date", dataIndex: "completedDate" },
     {
       title: "Approved By",
       render: (_, record) =>
@@ -480,7 +480,7 @@ const ExamManagements = () => {
           <Col xs={24} md={12}>
             <Input
               prefix={<SearchOutlined />}
-              placeholder="Search user or program"
+              placeholder="Search user or therapy"
               allowClear
               onChange={(e) => setSearchText(e.target.value)}
             />
@@ -488,7 +488,7 @@ const ExamManagements = () => {
 
           <Col xs={24} md={6}>
             <Select
-              placeholder="Filter by exam status"
+              placeholder="Filter by assessment status"
               allowClear
               style={{ width: "100%" }}
               onChange={setStatusFilter}

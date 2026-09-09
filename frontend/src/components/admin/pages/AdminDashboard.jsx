@@ -97,14 +97,14 @@ useEffect(() => {
       icon: <CalendarOutlined />,
     },
     {
-      title: "Exam Applicants",
+      title: "Assessment Applicants",
       value: dashboardStats?.user_exams?.total || 0,
       inProgress: dashboardStats?.user_exams?.in_progress || 0,
       completed: dashboardStats?.user_exams?.completed || 0,
       icon: <CalendarOutlined />,
     },
     {
-      title: "Reports",
+      title: "Assessment Reports",
       value: dashboardStats?.reports?.pending_uploaded || 0,
       uploadPending: dashboardStats?.reports?.pending_uploaded || 0,
       icon: <FileTextOutlined />,

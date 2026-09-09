@@ -329,7 +329,7 @@ const CollegeListAnalysis = () => {
 
         /* 🔹 PROGRAM + SERVICE */
         {
-            title: "Program / Counselling Service",
+            title: "Therapy / Treatment",
             width: 150,
             render: (_, record) => (
                 <div>
@@ -429,7 +429,7 @@ const CollegeListAnalysis = () => {
             ),
         },
         {
-            title: "Program / Counselling Service",
+            title: "Therapy / Treatment",
             width: 170,
             render: (_, record) => (
                 <div>

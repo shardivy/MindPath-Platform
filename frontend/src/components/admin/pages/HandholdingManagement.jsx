@@ -40,7 +40,7 @@ import CertificateTemplateModal from "../modals/CertificateTemplateModal";
 import HHSessionBookingModal from "../modals/HHSessionBookingModal";
 import GenerateCertificateModal from "../modals/GenerateCertificateModal";
 import { deleteHHSession, getHHSession } from "../../../hhSlices/handholdingSessionSlice";
-import { getSessionBookings, cancelSession, sendHandholdingReminder,  markSessionCompleted,  } from "../../../hhSlices/sessionBookingSlice";
+import { getSessionBookings, cancelSession, sendHandholdingReminder, markSessionCompleted, } from "../../../hhSlices/sessionBookingSlice";
 import { getHandholdingParticipants, getCardStats, updateHandholdingParticipant } from "../../../hhSlices/handholdingUsersSlice";
 import { getCertificateTemplates, getIssuedCertificates, getCertificateStats } from "../../../hhSlices/certificateSlice";
 import UploadCertificateTemplateModal from "../modals/UploadCertificateTemplateModal.jsx";
@@ -83,7 +83,7 @@ const HandholdingManagement = () => {
   const [previewTemplate, setPreviewTemplate] = useState(null);
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [reminderModalOpen, setReminderModalOpen] = useState(false);
-const [selectedReminder, setSelectedReminder] = useState(null);
+  const [selectedReminder, setSelectedReminder] = useState(null);
 
 
   /* ================= PAGINATION STATE ================= */
@@ -151,7 +151,7 @@ const [selectedReminder, setSelectedReminder] = useState(null);
       session: `Session ${item.session_no}`,
       session_no: item.session_no,
       date: item.session_date?.split("T")[0],
-     time: item.start_time || "-",
+      time: item.start_time || "-",
       status: statusMap[item.status] || "not_booked",
       preferred_counselling_mode: item.preferred_counselling_mode
         ? item.preferred_counselling_mode.charAt(0).toUpperCase() + item.preferred_counselling_mode.slice(1)
@@ -242,36 +242,36 @@ const [selectedReminder, setSelectedReminder] = useState(null);
   };
 
 
-//   const handleSendReminder = (record) => {
-//   setSelectedReminder(record);
-//   setReminderModalOpen(true);
-// };
+  //   const handleSendReminder = (record) => {
+  //   setSelectedReminder(record);
+  //   setReminderModalOpen(true);
+  // };
 
-const handleSendReminder = (record) => {
-  Modal.confirm({
-    title: "Send Reminder?",
-    content: `Send reminder to ${record.name}?`,
-    okText: "Yes",
-    cancelText: "No",
-    centered: true,
+  const handleSendReminder = (record) => {
+    Modal.confirm({
+      title: "Send Reminder?",
+      content: `Send reminder to ${record.name}?`,
+      okText: "Yes",
+      cancelText: "No",
+      centered: true,
 
-    async onOk() {
-      try {
-        const res = await dispatch(
-          sendHandholdingReminder({
-            participantId: record.participant_id,
-            sessionNo: record.session_no,
-          })
-        ).unwrap();
+      async onOk() {
+        try {
+          const res = await dispatch(
+            sendHandholdingReminder({
+              participantId: record.participant_id,
+              sessionNo: record.session_no,
+            })
+          ).unwrap();
 
-        message.success(res?.message || "Reminder sent successfully");
-      } catch (err) {
-        message.error(err?.message || "Failed to send reminder");
-        throw err; // important so modal knows it failed
-      }
-    },
-  });
-};
+          message.success(res?.message || "Reminder sent successfully");
+        } catch (err) {
+          message.error(err?.message || "Failed to send reminder");
+          throw err; // important so modal knows it failed
+        }
+      },
+    });
+  };
 
   /* ================= STATS ================= */
   const stats = [
@@ -437,7 +437,7 @@ const handleSendReminder = (record) => {
       render: (_, __, index) => index + 1,
     },
     {
-      title: "Username / Email",
+      title: "Name / Email",
       width: 120,
       render: (_, record) => (
         <div>
@@ -650,33 +650,33 @@ const handleSendReminder = (record) => {
   );
 
   const handleMarkCompleted = (record) => {
-  Modal.confirm({
-    title: "Mark Session as Completed",
-    content: `Are you sure you want to mark session for ${record.name} as completed?`,
-    okText: "Yes",
-    cancelText: "No",
-    centered: true,
+    Modal.confirm({
+      title: "Mark Session as Completed",
+      content: `Are you sure you want to mark session for ${record.name} as completed?`,
+      okText: "Yes",
+      cancelText: "No",
+      centered: true,
 
-    onOk: async () => {
-      try {
-        await dispatch(
-          markSessionCompleted({
-            participant_id: record.participant_id,
-            session_no: record.session_no,
-          })
-        ).unwrap();
+      onOk: async () => {
+        try {
+          await dispatch(
+            markSessionCompleted({
+              participant_id: record.participant_id,
+              session_no: record.session_no,
+            })
+          ).unwrap();
 
-        message.success("Session marked as completed");
+          message.success("Session marked as completed");
 
-        // ✅ refresh table
-        dispatch(getSessionBookings());
+          // ✅ refresh table
+          dispatch(getSessionBookings());
 
-      } catch (err) {
-        message.error(err?.message || "Failed to mark session completed");
-      }
-    },
-  });
-};
+        } catch (err) {
+          message.error(err?.message || "Failed to mark session completed");
+        }
+      },
+    });
+  };
 
 
   const bookingColumns = React.useMemo(() => {
@@ -687,7 +687,7 @@ const handleSendReminder = (record) => {
         render: (_, __, index) => index + 1,
       },
       {
-        title: "Username / Email",
+        title: "Name / Email",
         width: 150,
         render: (_, record) => (
           <div>
@@ -706,7 +706,7 @@ const handleSendReminder = (record) => {
         ),
       },
       {
-        title: "Preferred Counselling Mode",
+        title: "Preferred Session Mode",
         width: 150,
         render: (_, record) => {
           let color = "default";
@@ -794,69 +794,69 @@ const handleSendReminder = (record) => {
             );
           }
 
-      if (["booked", "rescheduled"].includes(record.status)) {
+          if (["booked", "rescheduled"].includes(record.status)) {
 
-  const sessionDate = dayjs(record.date).format("YYYY-MM-DD");
+            const sessionDate = dayjs(record.date).format("YYYY-MM-DD");
 
-  const slotStart = dayjs(
-    `${sessionDate} ${record.time}`,
-    "YYYY-MM-DD hh:mm A"
-  );
+            const slotStart = dayjs(
+              `${sessionDate} ${record.time}`,
+              "YYYY-MM-DD hh:mm A"
+            );
 
-  const fifteenMinutesBefore = slotStart.subtract(15, "minute");
+            const fifteenMinutesBefore = slotStart.subtract(15, "minute");
 
-  const markCompletedEnabled =
-    dayjs().isAfter(fifteenMinutesBefore);
+            const markCompletedEnabled =
+              dayjs().isAfter(fifteenMinutesBefore);
 
-  return (
-    <Space wrap>
-      <Button
-        type="primary"
-        icon={<EditOutlined />}
-        onClick={() => handleEditBooking(record)}
-      >
-        Reschedule
-      </Button>
+            return (
+              <Space wrap>
+                <Button
+                  type="primary"
+                  icon={<EditOutlined />}
+                  onClick={() => handleEditBooking(record)}
+                >
+                  Reschedule
+                </Button>
 
-      {/* ✅ MARK COMPLETED */}
-      <Button
-        type="primary"
-        disabled={!markCompletedEnabled}
-        style={{
-          backgroundColor: markCompletedEnabled
-            ? "#349304"
-            : "#d9d9d9",
-          borderColor: markCompletedEnabled
-            ? "#349304"
-            : "#d9d9d9",
-          color: markCompletedEnabled
-            ? "#fff"
-            : "rgba(0,0,0,0.25)",
-        }}
-        icon={<CheckCircleOutlined />}
-        onClick={() => handleMarkCompleted(record)}
-      >
-        Mark Completed
-      </Button>
+                {/* ✅ MARK COMPLETED */}
+                <Button
+                  type="primary"
+                  disabled={!markCompletedEnabled}
+                  style={{
+                    backgroundColor: markCompletedEnabled
+                      ? "#349304"
+                      : "#d9d9d9",
+                    borderColor: markCompletedEnabled
+                      ? "#349304"
+                      : "#d9d9d9",
+                    color: markCompletedEnabled
+                      ? "#fff"
+                      : "rgba(0,0,0,0.25)",
+                  }}
+                  icon={<CheckCircleOutlined />}
+                  onClick={() => handleMarkCompleted(record)}
+                >
+                  Mark Completed
+                </Button>
 
-      <Button
-        icon={<BellOutlined />}
-        onClick={() => handleSendReminder(record)}
-        disabled={!canBookSession(record)}
-      >
-        Send Reminder
-      </Button>
+                <Button
+                  icon={<BellOutlined />}
+                  onClick={() => handleSendReminder(record)}
+                  disabled={!canBookSession(record)}
+                >
+                  Send Reminder
+                </Button>
 
-      <Button
-        danger
-        icon={<DeleteOutlined />}
-        onClick={() => handleCancel(record)}
-      >
-        Cancel
-      </Button>
-    </Space>
-  );
-}
+                <Button
+                  danger
+                  icon={<DeleteOutlined />}
+                  onClick={() => handleCancel(record)}
+                >
+                  Cancel
+                </Button>
+              </Space>
+            );
+          }
 
           if (record.status === "completed") {
             return (
@@ -1031,7 +1031,7 @@ const handleSendReminder = (record) => {
       <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
         <Col span={24}>
           <Title level={3} style={{ marginBottom: 0 }}>
-        Train the Trainer 
+            Train the Trainer
           </Title>
         </Col>
       </Row>
@@ -1090,7 +1090,7 @@ const handleSendReminder = (record) => {
               }
             }}
             items={[
-              { key: "users", label: "Handholding Users" },
+              { key: "users", label: "Trainer Users" },
               { key: "sessions", label: "Session Template" },
               { key: "bookings", label: "Session Bookings" },
               { key: "certificates", label: "Certification" },

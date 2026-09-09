@@ -69,10 +69,10 @@ const handholdingProgram = Form.useWatch("is_handholding", form);
     <Modal
       title={
         viewMode
-          ? "View Counselling Service"
+          ? "View Treatment"
           : initialValues
-            ? "Edit Counselling Service"
-            : "Create Counselling Service"
+            ? "Edit Treatment"
+            : "Create Treatment"
       }
       open={visible}
       onCancel={onClose}
@@ -88,12 +88,12 @@ const handholdingProgram = Form.useWatch("is_handholding", form);
 
           {/* PACKAGE NAME */}
           <Form.Item
-            label="Counselling Service"
+            label="Treatment"
             name="name"
-            rules={[{ required: true, message: "Please enter counselling service name" }]}
+            rules={[{ required: true, message: "Please enter Treatment name" }]}
           >
             <Input
-              placeholder="Enter counselling service name"
+              placeholder="Enter Treatment name"
               disabled={viewMode}
             />
           </Form.Item>
@@ -132,12 +132,12 @@ const handholdingProgram = Form.useWatch("is_handholding", form);
 
           {/* PROGRAM */}
           <Form.Item
-            label="Program"
+            label="Therapy"
             name="program_id"
-            rules={[{ required: true, message: "Please select a program" }]}
+            rules={[{ required: true, message: "Please select a therapy" }]}
           >
             <Select
-              placeholder={programsLoading ? "Loading programs..." : "Select program"}
+              placeholder={programsLoading ? "Loading therapy..." : "Select therapy"}
               disabled={viewMode}
               loading={programsLoading}
             >
@@ -202,7 +202,7 @@ const handholdingProgram = Form.useWatch("is_handholding", form);
 
   {/* ENGINEERING SERVICE */}
   <Form.Item
-    label="Engineering Service"
+    label="Therapy Analysis"
     name="engineering_test_analysis"
     valuePropName="checked"
     style={{ flex: 1 }}
@@ -224,7 +224,7 @@ const handholdingProgram = Form.useWatch("is_handholding", form);
 
   {/* HANDHOLDING PROGRAM */}
   <Form.Item
-    label="Handholding Program"
+    label="Train the Trainer"
     name="is_handholding"
     valuePropName="checked"
     style={{ flex: 1 }}

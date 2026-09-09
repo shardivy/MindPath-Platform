@@ -401,7 +401,7 @@ const CreateSessionModal = ({ visible, onClose, onSave, mode = "create", data })
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  label="Student"
+                  label="Client"
                   name="student"
                   rules={[{ required: true }]}
                 >

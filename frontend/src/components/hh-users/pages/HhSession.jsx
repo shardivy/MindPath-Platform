@@ -239,11 +239,11 @@ const HhSession = () => {
   const [reportLoading, setReportLoading] = useState(true);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
 
-  const openGoogleMap = () => {
-    window.open(
-      "https://maps.google.com/?q=Abhinav+Career+Scope+Bavdhan+Pune",
-      "_blank"
-    );
+   const openGoogleMap = () => {
+    const mapUrl =
+      "https://www.google.com/maps/place/Golden+Arch/@18.5153598,73.7791943,869m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bc2bfe4646d6b4b:0x219b303b5a942de2!8m2!3d18.5153598!4d73.7791943!16s%2Fg%2F11mqxbvtxt?entry=ttu&g_ep=EgoyMDI2MDgwMy4wIKXMDSoASAFQAw%3D%3D";
+
+    window.open(mapUrl, "_blank");
   };
 
   const openBookingModal = (session) => {
@@ -792,10 +792,9 @@ const HhSession = () => {
               </Text>
 
               <Text style={{ lineHeight: 1.5 }}>
-                Abhinav Career Scope, Pune <br />
-                Bhagwati Maestros, Miller 403 <br />
-                LMD Chowk, Above Indian Smart Bazaar <br />
-                Bavdhan, Pune – 411021
+                Golden Arch, B1 Flat No. 4, 1st Floor,<br></br>
+Shivangya Apt, Lane 4C, Bavdhan,<br></br>
+Pune, Maharashtra 411021
               </Text>
             </div>
           </div>

@@ -389,7 +389,7 @@ const filteredSlots = slotsByDate.filter((slot) => {
     )}
 
                     {selectedSlot.student_name && (
-                      <p><b>Student Name:</b> {selectedSlot.student_name}</p>
+                      <p><b>Name:</b> {selectedSlot.student_name}</p>
                     )}
 
                     {selectedSlot.email && (

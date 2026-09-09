@@ -371,7 +371,7 @@ const ExamManagement = () => {
                       </Button>
 
                       {/* New Text Link */}
-                      <Text
+                      {/* <Text
                         style={{
                           display: "block",
                           marginTop: 10,
@@ -388,7 +388,7 @@ const ExamManagement = () => {
                         >
                           Click Here
                         </a>
-                      </Text>
+                      </Text> */}
                     </>
                   )}
 

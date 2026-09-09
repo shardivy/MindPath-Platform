@@ -22,7 +22,7 @@ const VerifyReviewModal = ({ open, onCancel, reviewData, onVerify }) => {
       <Title level={5}>Student Review Details</Title>
 
       <Descriptions bordered column={1} size="middle">
-        <Descriptions.Item label="Student Name">
+        <Descriptions.Item label="Name">
           <Text strong>{reviewData.name}</Text>
         </Descriptions.Item>
 

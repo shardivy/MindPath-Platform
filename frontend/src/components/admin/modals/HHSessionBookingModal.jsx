@@ -533,7 +533,7 @@ const handleMarkCompleted = () => {
     </p>
 
     <p>
-      <b>Student Name:</b>{" "}
+      <b>Name:</b>{" "}
       {selectedSlot.student_name || form.getFieldValue("student")?.label || "-"}
     </p>
 

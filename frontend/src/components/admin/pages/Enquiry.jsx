@@ -127,7 +127,7 @@ const Enquiry = () => {
       "User Name": item.name,
       "Email": item.email,
       "Mobile Number": item.phone,
-      "Program of Interest": item.program,
+      "Therapy of Interest": item.program,
       "Source": item.source,
       "Date": item.date,
       "Status": item.status,
@@ -196,7 +196,7 @@ const Enquiry = () => {
       ),
     },
     {
-      title: "Program of Interest",
+      title: "Therapy of Interest",
       dataIndex: "program",
       key: "program",
     },

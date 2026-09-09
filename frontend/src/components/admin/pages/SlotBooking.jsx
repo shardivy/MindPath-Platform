@@ -256,7 +256,7 @@ const SlotBooking = () => {
           (currentPage - 1) * pageSize + index + 1,
       },
       {
-        title: "User Name",
+        title: "Client Name",
         width: 150,
         render: (_, r) => (
           <>
@@ -296,7 +296,7 @@ const SlotBooking = () => {
         ),
       },
       {
-        title: "Preferred Counselling Mode",
+        title: "Preferred Session Mode",
         dataIndex: "modeLabel",
         width: 100,
         render: (m) => <Tag>{m}</Tag>,
@@ -386,7 +386,7 @@ const SlotBooking = () => {
                     setIsModalOpen(true);
                   }}
                 >
-                 Reschedule
+                  Reschedule
                 </Button>
 
                 <Button

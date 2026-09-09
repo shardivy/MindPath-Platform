@@ -158,12 +158,12 @@ const AdminLayout = () => {
     "/s-admin/dashboard": "Dashboard",
     "/s-admin/enquiry-leads": "Enquiry & Leads",
     "/s-admin/users": "Clients Enrolled",
-    "/s-admin/programs": "Programs & Services",
+    "/s-admin/programs": "Therapies & Treatments",
     "/s-admin/exams": "Assessment Management",
     "/s-admin/reportsmanagement": "Assessment Reports",
     "/s-admin/paymentmanagement": "Payment Management",
-    "/s-admin/slotbooking": "Counselling Bookings",
-    "/s-admin/createslot": "Create Counselling Slot ",
+    "/s-admin/slotbooking": "Session Bookings",
+    "/s-admin/createslot": "Create Session Slot ",
     "/s-admin/scheduler": "Scheduler",
     "/s-admin/followupManagement": "Follow Up Management",
     "/s-admin/contentManagement": "Content Management",
@@ -172,7 +172,7 @@ const AdminLayout = () => {
     "/s-admin/employeeList": "User List",
     "/s-admin/notificationManagement": "Notification Management",
     "/s-admin/settings": "Settings",
-    "/s-admin/collegeListAnalysis": "College List Analysis",
+    "/s-admin/collegeListAnalysis": "Therapy Analysis",
 
     "/s-admin/counsellor-dashboard": "Dashboard",
     "/s-admin/session-history": "Session History",
@@ -281,7 +281,7 @@ const AdminLayout = () => {
     (role === "admin" || role === "superadmin") && {
       key: "/s-admin/programs",
       icon: <BookFilled />,
-      label: "Program & Services",
+      label: "Therapies & Treatments",
       onClick: () => {
         navigate("/s-admin/programs");
         setDrawerVisible(false);
@@ -378,8 +378,7 @@ const AdminLayout = () => {
       // label: "College List Analysis",
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>College List</div>
-          <div>Analysis</div>
+          <div>Therapy Analysis</div>
         </div>
       ),
       onClick: () => {
@@ -395,8 +394,7 @@ const AdminLayout = () => {
       // label: "Counselling Slot Booking",
       label: (
         <div style={{ lineHeight: "20px" }}>
-          <div>Counselling</div>
-          <div>Slot Booking</div>
+          <div>Session Booking</div>
         </div>
       ),
       style: { marginBottom: 12 },
@@ -409,7 +407,7 @@ const AdminLayout = () => {
           label: (
             <div style={{ lineHeight: "20px" }}>
               <div>Create</div>
-              <div>Counselling Slot</div>
+              <div>Session Slot</div>
             </div>
           ),
           onClick: () => {

@@ -46,7 +46,7 @@ const phoneRules = [
 ];
 
 const classRules = [
-  { required: true, message: "Please select class / standard" },
+  { required: true, message: "Please select qualification" },
 ];
 
 const amountRules = [
@@ -81,23 +81,16 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
   const isView = modalMode === "view";
   const isEdit = modalMode === "edit";
 
-  const [classOptions] = useState([
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "Engineering",
-    "Medical",
-    "Law",
-    "Design",
-    "Commerce",
-    "Arts",
-    "BBA",
-    "UG",
-    "PG",
-    "Others",
-  ]);
+  // const [classOptions] = useState([
+  //  "School",
+  // "Secondary School",
+  // "Higher Secondary School",
+  // "Undergraduate",
+  // "Graduate",
+  // "Postgraduate",
+  // "Others",
+  
+  // ]);
 
   const selectedPackage = packages.find((p) => p.id === liveValues?.package);
   const totalPackageAmount = selectedPackage?.amount || selectedPackage?.price || selectedPackage?.total_amount || "";
@@ -375,7 +368,7 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
       onCancel={onClose}
       footer={null}
       // destroyOnClose
-      title={isEdit ? "Edit User" : isView ? "View User" : "Add User"}
+      title={isEdit ? "Edit Client" : isView ? "View Client" : "Add Client"}
       width="100%"
       style={{ maxWidth: 1100 }}
 
@@ -414,13 +407,15 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
 
                 {/* CLASS DROPDOWN */}
                 <Col xs={24} md={12}>
-                  <Form.Item name="study_class" label="Class / STD" rules={isView ? [] : classRules}>
-                    <Select disabled={isView} placeholder="Select class / standard">
-                      {classOptions.map((cls) => (
-                        <Option key={cls} value={cls}>
-                          {cls}
-                        </Option>
-                      ))}
+                  <Form.Item name="study_class" label="Qualification" rules={isView ? [] : classRules}>
+                    <Select disabled={isView} placeholder="Select qualification">
+                       <Option value="school">School</Option>
+  <Option value="secondary_school">Secondary School</Option>
+  <Option value="higher_secondary">Higher Secondary School</Option>
+  <Option value="undergraduate">Undergraduate</Option>
+  <Option value="graduate">Graduate</Option>
+  <Option value="postgraduate">Postgraduate</Option>
+  <Option value="others">Others</Option>
                     </Select>
                   </Form.Item>
                 </Col>
@@ -429,7 +424,7 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                   <Form.Item
                     label={
                       <span>
-                        Program
+                        Therapy
                         {isEdit && (
                           <Tooltip title="Program cannot be changed in edit mode , please delete the user and recreate if you want to change program">
                             <InfoCircleOutlined style={{ color: "#1890ff", cursor: "pointer", marginLeft: 6 }} />
@@ -438,10 +433,10 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                       </span>
                     }
                     name="program"
-                    rules={isView ? [] : [{ required: true, message: "Please select program" }]}
+                    rules={isView ? [] : [{ required: true, message: "Please select therapy" }]}
                   >
                     <Select
-                      placeholder={programsLoading ? "Loading..." : "Select program"}
+                      placeholder={programsLoading ? "Loading..." : "Select therapy"}
                       loading={programsLoading}
                       onChange={handleProgramChange}
                       allowClear
@@ -460,19 +455,19 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                   <Form.Item
                     label={
                       <span>
-                        Counselling Services
+                       Treatment
                         {isEdit && (
-                          <Tooltip title="Counselling service cannot be changed in edit mode , please delete the user and recreate if you want to change counselling service">
+                          <Tooltip title="Treatment cannot be changed in edit mode , please delete the user and recreate if you want to change treatment">
                             <InfoCircleOutlined style={{ color: "#1890ff", cursor: "pointer", marginLeft: 6 }} />
                           </Tooltip>
                         )}
                       </span>
                     }
                     name="package"
-                    rules={isView ? [] : [{ required: true, message: "Please select counselling service" }]}
+                    rules={isView ? [] : [{ required: true, message: "Please select Treatment" }]}
                   >
                     <Select
-                      placeholder={packagesLoading ? "Loading..." : "Select counselling service"}
+                      placeholder={packagesLoading ? "Loading..." : "Select Treatment"}
                       loading={packagesLoading}
                       allowClear
                       disabled={isView || isEdit}
@@ -489,11 +484,11 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                 <Col xs={24} md={12}>
                   <Form.Item
                     name="preferred_counselling_mode"
-                    label="Preferred Counselling Mode"
+                    label="Preferred Session Mode"
                     initialValue="online"
                     required
                   >
-                    <Select disabled={isView} placeholder="Select counselling mode">
+                    <Select disabled={isView} placeholder="Select session mode">
                       <Option value="online">Online</Option>
                       <Option value="offline">Offline</Option>
                     </Select>
@@ -640,12 +635,12 @@ const AddUserModal = ({ open, onClose, user, mode }) => {
                   <p><b>Name:</b> {form.getFieldValue('first_name')} {form.getFieldValue('last_name')}</p>
                   <p><b>Email:</b> {form.getFieldValue('email')}</p>
                   <p><b>Mobile:</b> {form.getFieldValue('phone')}</p>
-                  <p><b>Class:</b> {form.getFieldValue('study_class') || 'Not selected'}</p>
+                  <p><b>Qualification:</b> {form.getFieldValue('study_class') || 'Not selected'}</p>
 
-                  <p><b>Program:</b> {
+                  <p><b>Therapy:</b> {
                     programs.find(p => p.id === form.getFieldValue('program'))?.name || 'Not selected'
                   }</p>
-                  <p><b>Counselling Services:</b> {
+                  <p><b>Treatment:</b> {
                     packages.find(p => p.id === form.getFieldValue('package'))?.name || 'Not selected'
                   }</p>
 

@@ -69,8 +69,14 @@ const StudentRegister = () => {
   );
 
   const [classOptions] = useState([
-    "8", "9", "10", "11", "12", "Engineering", "Medical",
-    "Law", "Design", "Commerce", "Arts", "BBA", "UG", "PG", "Others",
+    "School",
+  "Secondary School",
+  "Higher Secondary School",
+  "Undergraduate",
+  "Graduate",
+  "Postgraduate",
+  "Others",
+  
   ]);
 
   const specializationMap = {
@@ -318,7 +324,7 @@ const lastName = values.lastName || "";
                 Start Your Journey 🎓
               </Title>
               <Text style={{ color: "rgba(255,255,255,0.9)", fontSize: 16, lineHeight: 1.6 }}>
-                Create your account to access career assessments, expert counselling, and a personalized student dashboard.
+                Create your account to access career assessments, expert counselling, and a personalized client dashboard.
               </Text>
             </Col>
 
@@ -354,7 +360,7 @@ const lastName = values.lastName || "";
                     marginBottom: 24,
                   }}
                 >
-                  Student / User Registration
+                  Client / User Registration
                 </Title>
               </div>
               <Form
@@ -397,7 +403,7 @@ const lastName = values.lastName || "";
                 <Row gutter={16}>
                   <Col md={24}>
                     <Form.Item
-                      label="Interested Program"
+                      label="Interested Therapy"
                       name="program"
                       rules={[{ required: true }]}
                     >
@@ -405,8 +411,8 @@ const lastName = values.lastName || "";
                         size="large"
                         placeholder={
                           programsLoading
-                            ? "Loading programs..."
-                            : "Select Interested Program"
+                            ? "Loading therapies..."
+                            : "Select Interested Therapy"
                         }
                         loading={programsLoading}
                       >
@@ -420,7 +426,7 @@ const lastName = values.lastName || "";
                   </Col>
                 </Row>
 
-                <Divider orientation="left">Student Details</Divider>
+                <Divider orientation="left">Client Details</Divider>
             <Row gutter={16}>
   <Col md={12}>
     <Form.Item
@@ -497,24 +503,26 @@ const lastName = values.lastName || "";
 {!hideParentSection && (
       <Col xs={24} md={12}>
     <Form.Item
-      label="Class"
+      label="Qualification"
       name="class"
       rules={[{ required: true }]}
     >
       <Select
         size="large"
-        placeholder="Select Class"
+        placeholder="Select qualification"
         onChange={(value) => {
           const specs = specializationMap[value] || [];
           setSpecializationOptions(specs);
           form.setFieldsValue({ specialization: undefined });
         }}
       >
-        {classOptions.map((cls) => (
-          <Option key={cls} value={cls}>
-            {cls}
-          </Option>
-        ))}
+        <Option value="school">School</Option>
+  <Option value="secondary_school">Secondary School</Option>
+  <Option value="higher_secondary">Higher Secondary School</Option>
+  <Option value="undergraduate">Undergraduate</Option>
+  <Option value="graduate">Graduate</Option>
+  <Option value="postgraduate">Postgraduate</Option>
+  <Option value="others">Others</Option>
       </Select>
     </Form.Item>
   </Col>

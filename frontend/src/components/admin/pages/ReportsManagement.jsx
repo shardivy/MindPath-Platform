@@ -265,7 +265,7 @@ const ReportsManagement = () => {
         (currentPage - 1) * pageSize + index + 1,
     },
     {
-      title: "User Name",
+      title: "Client Name",
       dataIndex: "name",
       render: (text, record) => (
         <>
@@ -276,7 +276,7 @@ const ReportsManagement = () => {
       ),
     },
     {
-      title: "Program / Counselling Service",
+      title: "Therapy / Treatment",
       width: 190,
       render: (_, record) => (
         <div>
@@ -311,7 +311,7 @@ const ReportsManagement = () => {
       ),
     },
     {
-      title: "Exam Status",
+      title: "Assessment Status",
       dataIndex: "examStatus",
       render: (text) => (
         <Tag color={examStatusColorMap[text]} style={{ borderRadius: 20 }}>

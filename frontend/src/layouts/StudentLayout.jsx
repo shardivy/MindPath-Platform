@@ -545,7 +545,7 @@ export default function StudentLayout() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Student Dashboard
+                  Client Dashboard
                 </div>
 
               </div>
@@ -626,7 +626,7 @@ export default function StudentLayout() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Student Panel
+                  Client Panel
                 </div>
               </div>
             }

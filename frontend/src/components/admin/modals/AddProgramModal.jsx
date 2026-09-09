@@ -36,11 +36,11 @@ const handleFinish = async (values) => {
       res = await dispatch(
         updateProgram({ id: initialValues.id, payload: values })
       ).unwrap();
-      message.success(res?.message || "Program updated successfully", 3);
+      message.success(res?.message || "Therapy updated successfully", 3);
     } else {
       // ADD MODE: call addProgram API
       res = await dispatch(addProgram(values)).unwrap();
-      message.success(res?.message || "Program saved successfully", 3);
+      message.success(res?.message || "Therapy saved successfully", 3);
     }
 
     // Refresh program list
@@ -60,10 +60,10 @@ const handleFinish = async (values) => {
     <Modal
       title={
         viewMode
-          ? "View Program"
+          ? "View Therapy"
           : initialValues
-          ? "Edit Program"
-          : "Create New Program"
+          ? "Edit Therapy"
+          : "Create New Therapy"
       }
       open={visible}
       onCancel={handleClose}
@@ -73,11 +73,11 @@ const handleFinish = async (values) => {
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
-          label="Program Name"
+          label="Therapy Name"
           name="name"
-          rules={[{ required: true, message: "Enter program name" }]}
+          rules={[{ required: true, message: "Enter therapy name" }]}
         >
-          <Input readOnly={viewMode} placeholder="Enter program name" />
+          <Input readOnly={viewMode} placeholder="Enter therapy name" />
         </Form.Item>
 
         <Form.Item

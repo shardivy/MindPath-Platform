@@ -320,12 +320,12 @@ const UploadPaymentModal = ({ open, onClose, onSuccess, paymentData }) => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                label={isHandholding ? "Select User" : "Select Student"}
+                label={isHandholding ? "Select User" : "Select Client"}
                 name="student_profile"
-                rules={[{ required: true, message: "Please select student" }]}
+                rules={[{ required: true, message: "Please select client" }]}
               >
                 <Select
-                  placeholder={isHandholding ? "Select user" : "Select student"}
+                  placeholder={isHandholding ? "Select user" : "Select client"}
                   loading={studentLoading}
                   showSearch
                   optionFilterProp="label"
@@ -349,12 +349,12 @@ const UploadPaymentModal = ({ open, onClose, onSuccess, paymentData }) => {
 
             <Col span={12}>
               <Form.Item
-                label="Counselling Service"
+                label="Treatment"
                 name="package"
                 rules={[{ required: true }]}
               >
                 <Select
-                  placeholder="Select counselling service"
+                  placeholder="Select Treatment"
                   loading={packageLoading}
                   onChange={handlePackageChange}
                 >

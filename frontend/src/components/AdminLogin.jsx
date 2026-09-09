@@ -562,7 +562,7 @@ const AdminLogin = () => {
 
               <div style={{ marginTop: 40, paddingLeft: 10 }}>
                 <Text style={{ color: "#E0E7FF", display: "block" }}>
-                  ✔ Student Dashboard
+                  ✔ Clinet Dashboard
                 </Text>
                 <Text style={{ color: "#E0E7FF", display: "block" }}>
                   ✔ Counsellor Panel

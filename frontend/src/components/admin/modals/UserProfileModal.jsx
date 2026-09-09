@@ -40,10 +40,10 @@ const formatDisplayDate = (value) => {
 /* ---------------- JOURNEY STEPS ---------------- */
 const baseJourneySteps = [
   "Registration",
-  "Counselling Service Selection",
+  "Treatment Selection",
   "Payment",
-  "Exam",
-  "Counselling Slot Booking",
+  "Assessment",
+  "Session Booking",
   "Review",
   "Report",
   "Full Access",
@@ -55,12 +55,12 @@ const journeySteps =
   // user?.program?.toLowerCase() === "engineering"
   [
     "Registration",
-    "Counselling Service Selection",
+    "Treatment Selection",
     "Payment",
-    "Exam",
+    // "Assessment",
     "Questionnaire",
     "Analysis Report",
-    "Counselling Slot Booking",
+    "Session Booking",
     "Review",
     "Report",
     "Full Access",
@@ -129,11 +129,11 @@ const UserProfileModal = ({ open, onClose, user }) => {
             </Col>
 
             <Col xs={24} md={12}>
-              <Title level={5}>Program Details</Title>
+              <Title level={5}>Therapy Details</Title>
               <Descriptions bordered column={1}>
-                <Descriptions.Item label="Program">{user.program}</Descriptions.Item>
-                <Descriptions.Item label="Counselling Services">{user.package}</Descriptions.Item>
-                <Descriptions.Item label="Preferred Counselling Mode">
+                <Descriptions.Item label="Therapy">{user.program}</Descriptions.Item>
+                <Descriptions.Item label="Treatment">{user.package}</Descriptions.Item>
+                <Descriptions.Item label="Preferred Session Mode">
                   {user.preferred_counselling_mode &&
                     user.preferred_counselling_mode !== "Not Specified" ? (
                     <Tag
@@ -185,7 +185,7 @@ const UserProfileModal = ({ open, onClose, user }) => {
                 </Descriptions.Item>
 
                 {showExamReport && (
-                  <Descriptions.Item label="Exam Status">
+                  <Descriptions.Item label="Assessment Status">
                     <Tag
                       color={
                         progressData.exam === "completed"

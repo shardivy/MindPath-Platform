@@ -381,11 +381,11 @@ const AddEnquiryModal = ({ open, onCancel, mode, enquiryData }) => {
                 <Col xs={24} sm={12}>
                   <Form.Item
                     name="program"
-                    label="Program"
+                    label="Therapy"
                     rules={[{ required: true }]}
                   >
                     <Select
-                      placeholder="Select program"
+                      placeholder="Select therapy"
                       loading={programsLoading}
                       onChange={handleProgramChange}
                       disabled={isConvert && !isWebsiteSource}
@@ -437,37 +437,28 @@ const AddEnquiryModal = ({ open, onCancel, mode, enquiryData }) => {
                     <Col xs={24} sm={12}>
                       <Form.Item
                         name="study_class"
-                        label="Class / STD"
+                        label="Qualification"
                         rules={[{ required: true }]}
                       >
-                        <Select placeholder="Select class / standard">
-                          <Option value="8">8</Option>
-                          <Option value="9">9</Option>
-                          <Option value="10">10</Option>
-                          <Option value="11">11</Option>
-                          <Option value="12">12</Option>
-                          <Option value="Engineering">Engineering</Option>
-                          <Option value="Medical">Medical</Option>
-                          <Option value="Law">Law</Option>
-                          <Option value="Design">Design</Option>
-                          <Option value="Commerce">Commerce</Option>
-                          <Option value="Arts">Arts</Option>
-                          <Option value="BBA">BBA</Option>
-                          <Option value="UG">UG</Option>
-                          <Option value="PG">PG</Option>
-                          <Option value="Others">Others</Option>
-
-                        </Select>
+                       <Select placeholder="Select qualification">
+  <Option value="school">School</Option>
+  <Option value="secondary_school">Secondary School</Option>
+  <Option value="higher_secondary">Higher Secondary School</Option>
+  <Option value="undergraduate">Undergraduate</Option>
+  <Option value="graduate">Graduate</Option>
+  <Option value="postgraduate">Postgraduate</Option>
+  <Option value="others">Others</Option>
+</Select>
                       </Form.Item>
                     </Col>
 
                     <Col xs={24} sm={12}>
                       <Form.Item
                         name="package"
-                        label="Counselling Services"
+                        label="Treatment"
                         rules={[{ required: true }]}
                       >
-                        <Select placeholder="Select counselling service" loading={packagesLoading}>
+                        <Select placeholder="Select treatment" loading={packagesLoading}>
                           {packages.map((p) => (
                             <Option key={p.id} value={p.id}>
                               {p.name}
@@ -666,7 +657,7 @@ const AddEnquiryModal = ({ open, onCancel, mode, enquiryData }) => {
                       <Divider />
 
                       <p>
-                        <b>Program:</b>{" "}
+                        <b>Therapy:</b>{" "}
                         {programs.find(
                           (p) =>
                             p.id === liveValues.program
@@ -674,7 +665,7 @@ const AddEnquiryModal = ({ open, onCancel, mode, enquiryData }) => {
                       </p>
 
                       <p>
-                        <b>Package:</b>{" "}
+                        <b>Treatment:</b>{" "}
                         {packages.find(
                           (p) =>
                             p.id === liveValues.package

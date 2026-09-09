@@ -28,10 +28,10 @@ const HhCertificates = () => {
 
   const certificateData = certificateList.length > 0 ? certificateList[0] : null;
   const hasCertificate = Boolean(certificateData);
-const isUnlocked =
-  hasCertificate && certificateData?.certificate_status === "issued";
-const isLocked =
-  !certificateData || certificateData?.certificate_status === "pending";
+  const isUnlocked =
+    hasCertificate && certificateData?.certificate_status === "issued";
+  const isLocked =
+    !certificateData || certificateData?.certificate_status === "pending";
 
   const getCertificateFileUrl = (fileUrl) => {
     if (!fileUrl) return null;
@@ -46,8 +46,8 @@ const isLocked =
 
   const certificate = {
     name: localStorage.getItem("userName") || "Participant",
-    course: certificateData?.program_type || "Handholding Program Completion",
-    issuedBy: "Abhinav Career Scope",
+    course: certificateData?.program_type || "Train the Trainer Program Completion",
+    issuedBy: "TrueMindPath",
     date: certificateData?.issued_at
       ? new Date(certificateData.issued_at).toLocaleDateString("en-IN")
       : "-",
@@ -113,9 +113,9 @@ const isLocked =
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-      //   background:
-      //     "radial-gradient(circle at top, rgba(24,144,255,0.14), transparent 32%), linear-gradient(180deg, #f7fbff 0%, #eef5ec 100%)",
-       }}
+        //   background:
+        //     "radial-gradient(circle at top, rgba(24,144,255,0.14), transparent 32%), linear-gradient(180deg, #f7fbff 0%, #eef5ec 100%)",
+      }}
     >
       <div
         style={{
@@ -205,9 +205,9 @@ const isLocked =
                 minWidth: isMobile ? "100%" : "170px",
               }}
             >
-{certificateData?.certificate_status === "issued"
-  ? "Unlocked and downloadable"
-  : "Locked until completion"}
+              {certificateData?.certificate_status === "issued"
+                ? "Unlocked and downloadable"
+                : "Locked until completion"}
             </div>
           </div>
 
@@ -351,7 +351,7 @@ const isLocked =
                     textTransform: "capitalize",
                   }}
                 >
-                Hand Holding Program 
+                 Train the Trainer Program
                 </div>
               </div>
 
@@ -394,39 +394,39 @@ const isLocked =
                 important details stay neat and easy to scan.
               </div>
 
-               <div
-        style={{
-          width: "100%",
-          maxWidth: "980px",
-          display: "flex",
-          justifyContent: isMobile ? "stretch" : "flex-end",
-          marginTop: 18,
-        }}
-      >
-        <Button
-          type="primary"
-          icon={<DownloadOutlined />}
-          onClick={handleDownload}
-      disabled={certificateData?.certificate_status !== "issued"}
-          style={{
-            height: 46,
-            paddingInline: 22,
-            borderRadius: 14,
-            width: isMobile ? "100%" : "auto",
-            background: "linear-gradient(90deg, #1677ff, #52c41a)",
-            border: "none",
-            boxShadow: "0 12px 24px rgba(22, 119, 255, 0.22)",
-            fontWeight: 600,
-          }}
-        >
-          Download Certificate
-        </Button>
-      </div>
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "980px",
+                  display: "flex",
+                  justifyContent: isMobile ? "stretch" : "flex-end",
+                  marginTop: 18,
+                }}
+              >
+                <Button
+                  type="primary"
+                  icon={<DownloadOutlined />}
+                  onClick={handleDownload}
+                  disabled={certificateData?.certificate_status !== "issued"}
+                  style={{
+                    height: 46,
+                    paddingInline: 22,
+                    borderRadius: 14,
+                    width: isMobile ? "100%" : "auto",
+                    background: "linear-gradient(90deg, #1677ff, #52c41a)",
+                    border: "none",
+                    boxShadow: "0 12px 24px rgba(22, 119, 255, 0.22)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Download Certificate
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-{isLocked && (
+        {isLocked && (
           <div
             style={{
               position: "absolute",

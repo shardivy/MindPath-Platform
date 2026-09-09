@@ -220,7 +220,7 @@ const CounsellorDashboard = () => {
         (pagination.current - 1) * pagination.pageSize + index + 1,
     },
     {
-      title: "User Name",
+      title: "Name",
       dataIndex: "studentName",
       render: (text, record) => (
         <div>
@@ -425,18 +425,18 @@ const CounsellorDashboard = () => {
     },
   ];
 
-  const staticLocation = {
-    officeName: "Abhinav Career Scope",
-    building: "Bhagwati Maestros, Miller 403",
-    landmarkLine1: "LMD Chowk, Above Indian Smart Bazaar",
-    area: "Bavdhan",
-    city: "Pune",
-    state: "Maharashtra",
-    pincode: "411021",
-    nearby: "Near Chandani Chowk, Bavdhan",
-    instructions: "Start 20 minutes earlier due to traffic",
-    parking: "Parking available outside the building gate"
-  };
+ const staticLocation = {
+  officeName: "TrueMindPath",
+  building: "Golden Arch, B1 Flat No. 4, 1st Floor",
+  landmarkLine1: "Shivangya Apt, Lane 4C",
+  area: "Bavdhan",
+  city: "Pune",
+  state: "Maharashtra",
+  pincode: "411021",
+  nearby: "Golden Arch, Bavdhan",
+  instructions: "Please arrive 15–20 minutes before your scheduled appointment.",
+  parking: "Parking available near the building."
+};
 
   return (
     <div style={{ padding: screens.xs ? 12 : 20 }}>
@@ -491,7 +491,7 @@ const CounsellorDashboard = () => {
               <Col xs={24} md={12}>
                 <Input
                   prefix={<SearchOutlined />}
-                  placeholder="Search by student name, email, date, mode, or status..."
+                  placeholder="Search by client name, email, date, mode, or status..."
                   allowClear
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}

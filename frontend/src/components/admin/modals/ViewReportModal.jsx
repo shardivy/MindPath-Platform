@@ -322,7 +322,7 @@ const fileName = getDisplayFileName(data);
           <Form form={form} layout="vertical">
             <Row gutter={[16, 12]}>
               <Col xs={24}>
-                <Form.Item label="Student Name" name="name">
+                <Form.Item label="Name" name="name">
                   <Input readOnly />
                 </Form.Item>
               </Col>

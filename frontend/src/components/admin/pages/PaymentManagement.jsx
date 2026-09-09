@@ -430,7 +430,7 @@ const PaymentManagement = () => {
     },
 
     {
-      title: "Program / Counselling Service",
+      title: "Therapy / Treatment",
       width: 200,
       render: (_, record) => (
         <div>
@@ -716,7 +716,7 @@ const PaymentManagement = () => {
 
         <Col xs={24} md={4}>
           <Select
-            placeholder="Program"
+            placeholder="Therapy"
             allowClear
             loading={programLoading}
             style={{ width: "100%" }}
@@ -728,7 +728,7 @@ const PaymentManagement = () => {
 
         <Col xs={24} md={4}>
           <Select
-            placeholder="Counselling Service"
+            placeholder="Treatment"
             allowClear
             loading={packageLoading}
             disabled={!programFilter}
@@ -856,7 +856,7 @@ const PaymentManagement = () => {
 
 
           {/* 🔹 TAB 1: NORMAL PAYMENTS */}
-          <Tabs.TabPane tab="Student Payments" key="normal">
+          <Tabs.TabPane tab="Client Payments" key="normal">
             <Card>
               {renderTableContent(
                 filteredData.filter(
@@ -867,7 +867,7 @@ const PaymentManagement = () => {
           </Tabs.TabPane>
 
           {/* 🔹 TAB 2: HANDHOLDING PAYMENTS */}
-          <Tabs.TabPane tab="Handholding Payments" key="handholding">
+          <Tabs.TabPane tab="Trainer Payments" key="handholding">
             <Card>
               {renderTableContent(
                 filteredData.filter(

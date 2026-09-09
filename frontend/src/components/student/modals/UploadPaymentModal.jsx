@@ -152,15 +152,15 @@ const handleSubmit = (values) => {
     }}
        >
 
-        {/* ===== STUDENT ===== */}
-        <Title level={5}>Student Details</Title>
+        {/* ===== CLIENT ===== */}
+        <Title level={5}>Client Details</Title>
 
         <Row gutter={16}>
           <Col xs={24} md={12}>
             <Form.Item
-              label="Student Name"
+              label="Name"
               name="student_profile"
-              rules={[{ required: true, message: "Enter student name" }]}
+              rules={[{ required: true, message: "Enter name" }]}
 
             >
               <Input.TextArea rows={2} disabled style={{ resize: "none" }} />
@@ -169,12 +169,12 @@ const handleSubmit = (values) => {
 
           <Col xs={24} md={12}>
             <Form.Item
-              label="Counselling Service"
+              label="Treatment"
               name="package"
               rules={[{ required: true }]}
 
             >
-              <Input placeholder="Enter counselling service" disabled />
+              <Input placeholder="Enter treatment" disabled />
             </Form.Item>
           </Col>
         </Row>

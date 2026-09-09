@@ -231,7 +231,7 @@ setIsPdfFile(isPdf);
                 <Form form={form} layout="vertical" style={{ width: "100%" }}>
                     <Row gutter={12} style={{ margin: 0 }}>
                         <Col xs={24}>
-                            <Form.Item label="Student Name" name="name">
+                            <Form.Item label="Name" name="name">
                                 <Input readOnly />
                             </Form.Item>
                         </Col>
