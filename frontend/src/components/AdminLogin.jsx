@@ -124,7 +124,7 @@
 //           <Row>
 //             {/* ===== LEFT BRAND PANEL ===== */}
 
-           
+
 //             <Col
 //               xs={0}
 //               md={10}
@@ -206,7 +206,7 @@
 //                   <Lottie animationData={meditationLottie} loop autoplay style={{ width: 120, height: 120 }} />
 //                   Requires: npm install lottie-react
 //               */}
-             
+
 
 //               <style>
 //                 {`
@@ -447,14 +447,14 @@ const AdminLogin = () => {
         //   break;
 
         case "student":
-  if (complete_profile) {
-    // 🔥 First go to program selection
-    navigate("/program-selection");
-  } else {
-    // incomplete profile
-    navigate("/student/student-profile");
-  }
-  break;
+          if (complete_profile) {
+            // 🔥 First go to program selection
+            navigate("/program-selection");
+          } else {
+            // incomplete profile
+            navigate("/student/student-profile");
+          }
+          break;
 
         case "handholding":
           navigate("/handholding/dashboard");
@@ -556,8 +556,8 @@ const AdminLogin = () => {
                   lineHeight: 1.6,
                 }}
               >
-                Login to continue your learning, counselling, or management
-                journey.
+                Login to continue your therapy sessions, treatment plans, and personalized care journey.
+
               </Text>
 
               <div style={{ marginTop: 40, paddingLeft: 10 }}>
@@ -565,7 +565,7 @@ const AdminLogin = () => {
                   ✔ Client Dashboard
                 </Text>
                 <Text style={{ color: "#E0E7FF", display: "block" }}>
-                  ✔ Counsellor Panel
+                  ✔ Counsellor Dashboard
                 </Text>
                 <Text style={{ color: "#E0E7FF", display: "block" }}>
                   ✔ Admin Management
@@ -604,7 +604,7 @@ const AdminLogin = () => {
                     color: "#1E40AF",
                   }}
                 >
-               TrueMindPath
+                  TrueMindPath
                 </div>
               </div>
 

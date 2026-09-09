@@ -70,13 +70,13 @@ const StudentRegister = () => {
 
   const [classOptions] = useState([
     "School",
-  "Secondary School",
-  "Higher Secondary School",
-  "Undergraduate",
-  "Graduate",
-  "Postgraduate",
-  "Others",
-  
+    "Secondary School",
+    "Higher Secondary School",
+    "Undergraduate",
+    "Graduate",
+    "Postgraduate",
+    "Others",
+
   ]);
 
   const specializationMap = {
@@ -202,8 +202,8 @@ const StudentRegister = () => {
       const formData = new FormData();
 
       // split name safely
-    const firstName = values.firstName || "";
-const lastName = values.lastName || "";
+      const firstName = values.firstName || "";
+      const lastName = values.lastName || "";
 
       formData.append("first_name", firstName);
       formData.append("last_name", lastName);
@@ -324,14 +324,14 @@ const lastName = values.lastName || "";
                 Start Your Journey 🎓
               </Title>
               <Text style={{ color: "rgba(255,255,255,0.9)", fontSize: 16, lineHeight: 1.6 }}>
-                Create your account to access career assessments, expert counselling, and a personalized client dashboard.
+                Create your account to access therapy, personalized treatment plans, expert consultations, and your dedicated wellness dashboard.
               </Text>
             </Col>
 
             {/* RIGHT FORM PANEL */}
             <Col xs={24} md={14} style={{ padding: "48px 40px", background: "#fff", borderRadius: "0 24px 24px 0" }}>
               {/* LOGO + TITLE */}
-                    <div style={{ marginBottom: 16 }}>
+              <div style={{ marginBottom: 16 }}>
                 {/* <img
                   src="/Abhinav-logo.jpg"
                   alt="Career Counselling"
@@ -350,7 +350,7 @@ const lastName = values.lastName || "";
                     color: "#1E40AF",
                   }}
                 >
-                 TrueMindPath
+                  TrueMindPath
                 </div>
 
                 <Title
@@ -427,107 +427,107 @@ const lastName = values.lastName || "";
                 </Row>
 
                 <Divider orientation="left">Client Details</Divider>
-            <Row gutter={16}>
-  <Col md={12}>
-    <Form.Item
-      label="First Name"
-      name="firstName"
-      rules={[{ required: true, message: "Enter first name" }]}
-    >
-      <Input size="large" prefix={<UserOutlined />} />
-    </Form.Item>
-  </Col>
+                <Row gutter={16}>
+                  <Col md={12}>
+                    <Form.Item
+                      label="First Name"
+                      name="firstName"
+                      rules={[{ required: true, message: "Enter first name" }]}
+                    >
+                      <Input size="large" prefix={<UserOutlined />} />
+                    </Form.Item>
+                  </Col>
 
-  <Col md={12}>
-    <Form.Item
-      label="Last Name"
-      name="lastName"
-      rules={[{ required: true, message: "Enter last name" }]}
-    >
-      <Input size="large" prefix={<UserOutlined />} />
-    </Form.Item>
-  </Col>
-</Row>
+                  <Col md={12}>
+                    <Form.Item
+                      label="Last Name"
+                      name="lastName"
+                      rules={[{ required: true, message: "Enter last name" }]}
+                    >
+                      <Input size="large" prefix={<UserOutlined />} />
+                    </Form.Item>
+                  </Col>
+                </Row>
 
-                
-{hideParentSection && (
-  <Row gutter={16}>
-    <Col xs={24} md={12}>
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[{ type: "email", required: true }]}
-      >
-        <Input size="large" prefix={<MailOutlined />} />
-      </Form.Item>
-    </Col>
 
-    <Col xs={24} md={12}>
-      <Form.Item
-        label="Mobile Number"
-        name="mobile"
-        rules={[{ required: true, message: "Enter mobile number" }]}
-      >
-        <Input size="large" prefix={<PhoneOutlined />} maxLength={10} />
-      </Form.Item>
-    </Col>
-  </Row>
-)}
-{!hideParentSection && (
-  <>
-    <Row gutter={16}>
-      <Col xs={24} md={12}>
-        <Form.Item label="Date of Birth" name="dob">
-          <DatePicker size="large" style={{ width: "100%" }} />
-        </Form.Item>
-      </Col>
+                {hideParentSection && (
+                  <Row gutter={16}>
+                    <Col xs={24} md={12}>
+                      <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[{ type: "email", required: true }]}
+                      >
+                        <Input size="large" prefix={<MailOutlined />} />
+                      </Form.Item>
+                    </Col>
 
-      <Col xs={24} md={12}>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ type: "email", required: true }]}
-        >
-          <Input size="large" prefix={<MailOutlined />} />
-        </Form.Item>
-      </Col>
-    </Row>
+                    <Col xs={24} md={12}>
+                      <Form.Item
+                        label="Mobile Number"
+                        name="mobile"
+                        rules={[{ required: true, message: "Enter mobile number" }]}
+                      >
+                        <Input size="large" prefix={<PhoneOutlined />} maxLength={10} />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                )}
+                {!hideParentSection && (
+                  <>
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item label="Date of Birth" name="dob">
+                          <DatePicker size="large" style={{ width: "100%" }} />
+                        </Form.Item>
+                      </Col>
 
-    <Row gutter={16}>
-      <Col xs={24} md={12}>
-        <Form.Item label="Mobile Number" name="mobile">
-          <Input size="large" prefix={<PhoneOutlined />} maxLength={10} />
-        </Form.Item>
-      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          label="Email"
+                          name="email"
+                          rules={[{ type: "email", required: true }]}
+                        >
+                          <Input size="large" prefix={<MailOutlined />} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
 
-{!hideParentSection && (
-      <Col xs={24} md={12}>
-    <Form.Item
-      label="Qualification"
-      name="class"
-      rules={[{ required: true }]}
-    >
-      <Select
-        size="large"
-        placeholder="Select qualification"
-        onChange={(value) => {
-          const specs = specializationMap[value] || [];
-          setSpecializationOptions(specs);
-          form.setFieldsValue({ specialization: undefined });
-        }}
-      >
-        {classOptions.map((cls) => (
-          <Option key={cls} value={cls}>
-            {cls}
-          </Option>
-        ))}
-      </Select>
-    </Form.Item>
-  </Col>
-)}
-    </Row>
-  </>
-)}
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item label="Mobile Number" name="mobile">
+                          <Input size="large" prefix={<PhoneOutlined />} maxLength={10} />
+                        </Form.Item>
+                      </Col>
+
+                      {!hideParentSection && (
+                        <Col xs={24} md={12}>
+                          <Form.Item
+                            label="Qualification"
+                            name="class"
+                            rules={[{ required: true }]}
+                          >
+                            <Select
+                              size="large"
+                              placeholder="Select qualification"
+                              onChange={(value) => {
+                                const specs = specializationMap[value] || [];
+                                setSpecializationOptions(specs);
+                                form.setFieldsValue({ specialization: undefined });
+                              }}
+                            >
+                              {classOptions.map((cls) => (
+                                <Option key={cls} value={cls}>
+                                  {cls}
+                                </Option>
+                              ))}
+                            </Select>
+                          </Form.Item>
+                        </Col>
+                      )}
+                    </Row>
+                  </>
+                )}
 
 
 
@@ -1186,7 +1186,7 @@ export default StudentRegister;
 //                       <Input size="large" prefix={<PhoneOutlined />} maxLength={10} />
 //                     </Form.Item>
 //                   </Col>
-//                   {/* 
+//                   {/*
 //                   {!hideParentSection && (
 //                     <Col xs={24} md={12}>
 //                       <Form.Item
