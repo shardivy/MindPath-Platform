@@ -33,7 +33,7 @@ Please make sure to join the session on time.
 If you need to reschedule, please contact support.
 
 Best Regards  
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -77,7 +77,7 @@ Please review the updated session schedule.
 If you have any questions, feel free to contact our support team.
 
 Best Regards  
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -107,16 +107,16 @@ def generate_counselling_reminder(slot, student_profile, booking_status):
     # ==========================================
     if booking_status == "not_booked":
         return {
-            "subject": "Slot Booking Reminder | Abhinav Career Scope",
+            "subject": "Slot Booking Reminder | TheCareerFront",
             "message": f"""
-Greetings from Abhinav Career Scope.
+Greetings from TheCareerFront.
 
 You have not booked your counselling slot yet.
 
 Please book your slot as soon as possible to continue your counselling process.
 
 Regards,
-Abhinav Career Scope.
+TheCareerFront.
 """.strip()
         }
 
@@ -124,10 +124,10 @@ Abhinav Career Scope.
     # 🔹 BOOKED / RESCHEDULED SUBJECT
     # ==========================================
     if booking_status == "rescheduled":
-        subject = "Rescheduled Counselling Session Reminder | Abhinav Career Scope"
+        subject = "Rescheduled Counselling Session Reminder | TheCareerFront"
         session_label = "Your rescheduled session"
     else:
-        subject = "Counselling Session Reminder | Abhinav Career Scope"
+        subject = "Counselling Session Reminder | TheCareerFront"
         session_label = "Your session"
 
     # ==========================================
@@ -136,7 +136,7 @@ Abhinav Career Scope.
     if preferred_mode == "online":
 
         message = f"""
-Greetings from Abhinav Career Scope.
+Greetings from TheCareerFront.
 
 {session_label} is scheduled on {slot.date} at {slot.start_time}.
 Please join 15 minutes before the scheduled time.
@@ -150,10 +150,10 @@ Instructions for Online:
 For any queries or assistance:
 
 Call / WhatsApp:
-+91 99226 95424 | +91 82080 30557
++91 84849 05526 | +91 84849 06643
 
 Regards,
-Abhinav Career Scope.
+TheCareerFront.
 """.strip()
 
     # ==========================================
@@ -162,7 +162,7 @@ Abhinav Career Scope.
     else:
 
         message = f"""
-Greetings from Abhinav Career Scope.
+Greetings from TheCareerFront.
 
 {session_label} is scheduled on {slot.date} at {slot.start_time}.
 Please reach half an hour before the scheduled time.
@@ -176,10 +176,10 @@ Instructions for Offline:
 For any queries or assistance:
 
 Call / WhatsApp:
-+91 99226 95424 | +91 82080 30557
++91 84849 05526 | +91 84849 06643
 
 Regards,
-Abhinav Career Scope.
+TheCareerFront.
 """.strip()
 
     return {

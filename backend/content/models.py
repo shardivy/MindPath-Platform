@@ -27,6 +27,7 @@ class Content(models.Model):
     image = models.ImageField(upload_to='content_images/', null=True, blank=True)
     is_draft = models.BooleanField(default=True)
     download_count = models.PositiveIntegerField(default=0)
+    is_student_visible = models.BooleanField(default=True, null=True, blank=True)
     
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

@@ -55,6 +55,7 @@ class ContentUploadSerializer(serializers.ModelSerializer):
             "download_count",
             "free_content",
             "payment_required",
+            "is_student_visible",
             "is_draft",
         ]
     # ✅ Override representation to show preview URL instead of file path

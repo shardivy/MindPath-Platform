@@ -41,7 +41,7 @@ Payment Status: {payment.status}
 Thank you for your payment.
 
 Best Regards,
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -73,7 +73,7 @@ Payment Status: {payment.status}
 Please login to the portal to view updated details.
 
 Best Regards,
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -122,7 +122,7 @@ Please complete the remaining payment to activate your full package access.
 Thank you for choosing our services.
 
 Best Regards  
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -156,7 +156,7 @@ Please review your payment details and submit the correct information again.
 If you believe this is an error, please contact our support team.
 
 Best Regards  
-Support Team
+TheCareerFront
 """
 
     send_mail(
@@ -289,7 +289,7 @@ def generate_receipt_pdf(name, service_name, amount, date=None):
     pdf.drawCentredString(
         width / 2,
         height - 60,
-        "ABHINAV CAREER SCOPE"
+        "TheCareerFront"
     )
 
     # Set normal font for address
@@ -302,7 +302,7 @@ def generate_receipt_pdf(name, service_name, amount, date=None):
 
     # Contact details line
     address_line2 = (
-        "Mobile: 9922695424 | Email: abhinavcareerscope@gmail.com | Website: abhinavcareerscope.com"
+        "Mobile: +91 84849 05526 | Email: rightanalysismatters@gmail.com | Website: https://ramsolutions.in/"
     )
 
     # Draw centered address
@@ -421,7 +421,7 @@ def generate_receipt_pdf(name, service_name, amount, date=None):
     pdf.drawRightString(
         width - 85,
         y,
-        "Reena Bhutada"
+        "Priti Borse"
     )
 
     # Normal font for designation
