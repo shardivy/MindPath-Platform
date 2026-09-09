@@ -440,15 +440,16 @@ const AddEnquiryModal = ({ open, onCancel, mode, enquiryData }) => {
                         label="Qualification"
                         rules={[{ required: true }]}
                       >
-                       <Select placeholder="Select qualification">
-  <Option value="school">School</Option>
-  <Option value="secondary_school">Secondary School</Option>
-  <Option value="higher_secondary">Higher Secondary School</Option>
-  <Option value="undergraduate">Undergraduate</Option>
-  <Option value="graduate">Graduate</Option>
-  <Option value="postgraduate">Postgraduate</Option>
-  <Option value="others">Others</Option>
-</Select>
+                        <Select placeholder="Select qualification">
+                          <Option value="School">School</Option>
+                          <Option value="Secondary School">Secondary School</Option>
+                          <Option value="Higher Secondary School">Higher Secondary School</Option>
+                          <Option value="Undergraduate">Undergraduate</Option>
+                          <Option value="Graduate">Graduate</Option>
+                          <Option value="Postgraduate">Postgraduate</Option>
+                          <Option value="Others">Others</Option>
+
+                        </Select>
                       </Form.Item>
                     </Col>
 

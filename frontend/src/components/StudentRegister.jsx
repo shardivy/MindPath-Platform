@@ -398,7 +398,7 @@ const lastName = values.lastName || "";
 
 
                 {/* 🔥 PROGRAM FIRST */}
-                <Divider orientation="left">Select Program</Divider>
+                <Divider orientation="left">Select Therapy</Divider>
 
                 <Row gutter={16}>
                   <Col md={24}>
@@ -516,13 +516,11 @@ const lastName = values.lastName || "";
           form.setFieldsValue({ specialization: undefined });
         }}
       >
-        <Option value="school">School</Option>
-  <Option value="secondary_school">Secondary School</Option>
-  <Option value="higher_secondary">Higher Secondary School</Option>
-  <Option value="undergraduate">Undergraduate</Option>
-  <Option value="graduate">Graduate</Option>
-  <Option value="postgraduate">Postgraduate</Option>
-  <Option value="others">Others</Option>
+        {classOptions.map((cls) => (
+          <Option key={cls} value={cls}>
+            {cls}
+          </Option>
+        ))}
       </Select>
     </Form.Item>
   </Col>
@@ -534,7 +532,7 @@ const lastName = values.lastName || "";
 
 
                 <Row gutter={16}>
-                  {!hideParentSection && (
+                  {/* {!hideParentSection && (
                     <Col md={12}>
                       <Form.Item label="Specialization" name="specialization">
                         <Select size="large" placeholder="Select Specialization" disabled={specializationOptions.length === 0}>
@@ -546,9 +544,9 @@ const lastName = values.lastName || "";
                         </Select>
                       </Form.Item>
                     </Col>
-                  )}
+                  )} */}
 
-                  {!hideParentSection && (
+                  {/* {!hideParentSection && (
                     <Col md={12}>
                       <Form.Item label="Stream" name="stream">
                         <Select
@@ -565,7 +563,7 @@ const lastName = values.lastName || "";
                         </Select>
                       </Form.Item>
                     </Col>
-                  )}
+                  )} */}
 
                 </Row>
 
