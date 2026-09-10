@@ -69,49 +69,76 @@ const CreateSessionModal = ({ visible, onClose, onSave, mode = "create", data })
   // ================= PREFILL CREATE / EDIT / VIEW =================
   useEffect(() => {
     if (!visible || !data) return;
-    if (!students.length || !counsellors.length) return;
 
     const lead = data.counsellors?.find((c) => c.role === "lead");
     const assistant = data.counsellors?.find((c) => c.role === "assistant");
 
-    // Determine mode for prefill (from student preference or slot)
+    // ================= STUDENT =================
+    const studentId = data.student?.id;
+
+    const studentLabel = data.student
+      ? `${data.student.first_name || ""} ${data.student.last_name || ""}`.trim()
+      : "";
+
+    // ================= MODE =================
+    const backendMode =
+      data.student?.preferred_counselling_mode?.toLowerCase();
+
     const prefillMode =
-      data.student?.preferred_counselling_mode?.toLowerCase() === "online"
+      backendMode === "online"
         ? "Online"
-        : data.student?.preferred_counselling_mode?.toLowerCase() === "offline"
+        : backendMode === "offline"
           ? "Offline"
           : data.slot?.mode
-            ? data.slot.mode.charAt(0).toUpperCase() + data.slot.mode.slice(1)
+            ? data.slot.mode.charAt(0).toUpperCase() +
+            data.slot.mode.slice(1).toLowerCase()
             : undefined;
 
+    // ================= FORM PREFILL =================
     form.setFieldsValue({
-      student: {
-        value: data.student?.id,
-        label: (
-          <div>
+      student: studentId
+        ? {
+          value: studentId,
+          label: (
             <div>
-              {data.student?.first_name || ""} {data.student?.last_name || ""}
+              <div>
+                {studentLabel}
+              </div>
+
+              <div style={{ fontSize: 12, color: "#888" }}>
+                {data.student?.email || ""}
+              </div>
             </div>
-            <div style={{ fontSize: 12, color: "#888" }}>
-              {data.student?.email || ""}
-            </div>
-          </div>
-        ),
-      },
+          ),
+        }
+        : undefined,
+
       mode: prefillMode,
-      primaryCounsellor: lead
-        ? { value: lead.counsellor.id, label: `${lead.counsellor.first_name} ${lead.counsellor.last_name}` }
-        : null,
-      secondaryCounsellor: assistant
-        ? { value: assistant.counsellor.id, label: `${assistant.counsellor.first_name} ${assistant.counsellor.last_name}` }
-        : null,
-      date: data.date ? dayjs(data.date) : null,
+
+      primaryCounsellor: lead?.counsellor?.id
+        ? {
+          value: lead.counsellor.id,
+          label: `${lead.counsellor.first_name || ""} ${lead.counsellor.last_name || ""
+            }`.trim(),
+        }
+        : undefined,
+
+      secondaryCounsellor: assistant?.counsellor?.id
+        ? {
+          value: assistant.counsellor.id,
+          label: `${assistant.counsellor.first_name || ""} ${assistant.counsellor.last_name || ""
+            }`.trim(),
+        }
+        : undefined,
+
+      date: data.date ? dayjs(data.date) : undefined,
     });
 
+    // ================= LOCAL STATE =================
     setPrimaryCounsellorId(lead?.counsellor?.id || null);
     setSelectedDate(data.date ? dayjs(data.date) : null);
     setSelectedSlot(data.slot || null);
-  }, [visible, data, students, counsellors, form]);
+  }, [visible, data, form]);
 
   // ================= FETCH SLOTS =================
   useEffect(() => {
@@ -410,6 +437,7 @@ const CreateSessionModal = ({ visible, onClose, onSave, mode = "create", data })
                     loading={studentsLoading}
                     showSearch
                     optionFilterProp="label"
+                    optionLabelProp="label"
                     labelInValue
                   >
                     {students.map((s) => (
