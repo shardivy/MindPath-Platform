@@ -117,7 +117,7 @@ class StudentProfile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="student_profile", null=True)
     parent = models.ForeignKey(ParentProfile, on_delete=models.SET_NULL, null=True, related_name='children')
-    study_class = models.CharField(max_length=20, blank=True, null=True)
+    study_class = models.CharField(max_length=200, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
     current_academic_stage = models.CharField(max_length=20, blank=True, null=True)
     current_academic_year = models.CharField(max_length=10, blank=True, null=True)
