@@ -280,22 +280,41 @@ class StudentBookingSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         
-class CounsellorStudentBookingSerializer(serializers.ModelSerializer):
-    student_id = serializers.IntegerField(source="student.id", read_only=True)
+class CounsellorStudentBookingSerializer(
+    serializers.ModelSerializer
+):
+
+    student_id = serializers.IntegerField(
+        source="student.id",
+        read_only=True
+    )
+
     student_name = serializers.SerializerMethodField()
     student_email = serializers.SerializerMethodField()
     student_phone = serializers.SerializerMethodField()
-    preferred_counselling_mode = serializers.CharField(source="student.preferred_counselling_mode", read_only=True)
+
+    preferred_counselling_mode = serializers.CharField(
+        source="student.preferred_counselling_mode",
+        read_only=True
+    )
+
     counsellor_name = serializers.SerializerMethodField()
     role = serializers.SerializerMethodField()
     slot_time = serializers.SerializerMethodField()
-    mode = serializers.CharField(source="slot.mode", read_only=True)
+
+    mode = serializers.CharField(
+        source="slot.mode",
+        read_only=True
+    )
+
     report_file = serializers.SerializerMethodField()
+
     aptitude_test = serializers.SerializerMethodField()
     engineering_test_analysis = serializers.SerializerMethodField()
 
     class Meta:
         model = Booking
+
         fields = [
             "id",
             "student_id",
@@ -313,143 +332,169 @@ class CounsellorStudentBookingSerializer(serializers.ModelSerializer):
             "aptitude_test",
             "engineering_test_analysis",
         ]
-        
-    
-    # def get_report_file(self, obj):
-    #     request = self.context.get("request")
 
-    #     report = (
-    #         Report.objects
-    #         .filter(user=obj.student.user)
-    #         .order_by("-uploaded_at")
-    #         .first()
-    #     )
-
-    #     if not report or not report.file_path:
-    #         return None
-
-    #     try:
-    #         # Actual uploaded filename
-    #         file_name = os.path.basename(
-    #             report.file_path.name
-    #         )
-
-    #         # File extension
-    #         file_extension = os.path.splitext(
-    #             file_name
-    #         )[1].lower()
-
-    #         # ==========================================
-    #         # PDF → Preview Route
-    #         # ==========================================
-    #         if file_extension == ".pdf":
-    #             return request.build_absolute_uri(
-    #                 f"/api/report/report/pdf/{report.id}/"
-    #             )
-
-    #         # ==========================================
-    #         # Other Files → Direct Media URL
-    #         # Excel / Word / ZIP / DOC / XLSX etc.
-    #         # ==========================================
-    #         return request.build_absolute_uri(
-    #             report.file_path.url
-    #         )
-
-    #     except Exception:
-    #         return None
-     
+    # =========================================================
+    # REPORT FILE
+    # =========================================================
     def get_report_file(self, obj):
+
         request = self.context.get("request")
 
         report = (
             Report.objects
-            .filter(user=obj.student.user)
+            .filter(
+                user=obj.student.user
+            )
             .order_by("-uploaded_at")
             .first()
         )
 
+        # IMPORTANT:
+        # Student may not have uploaded a report.
         if not report or not report.file_path:
             return None
 
         try:
-            # ✅ Actual uploaded filename
-            file_name = os.path.basename(
-                report.file_path.name
-            )
 
-            # ✅ ALL file types use same secure API
             return request.build_absolute_uri(
                 f"/api/report/report/pdf/{report.id}/"
             )
 
-        except Exception:
+        except Exception as e:
+
+            print(
+                f"Error getting report URL: {str(e)}"
+            )
+
             return None
-     
-        
+
+    # =========================================================
+    # STUDENT ID
+    # =========================================================
     def get_student_id(self, obj):
+
         return obj.student.id
 
+    # =========================================================
+    # STUDENT NAME
+    # =========================================================
     def get_student_name(self, obj):
-        return f"{obj.student.user.first_name} {obj.student.user.last_name}"
 
+        return (
+            f"{obj.student.user.first_name} "
+            f"{obj.student.user.last_name}"
+        ).strip()
+
+    # =========================================================
+    # STUDENT EMAIL
+    # =========================================================
     def get_student_email(self, obj):
+
         return obj.student.user.email
-    
+
+    # =========================================================
+    # STUDENT PHONE
+    # =========================================================
     def get_student_phone(self, obj):
+
         return obj.student.user.phone
-    
+
+    # =========================================================
+    # COUNSELLING MODE
+    # =========================================================
     def get_preferred_counselling_mode(self, obj):
+
         return obj.student.preferred_counselling_mode
 
-    # def get_counsellor_name(self, obj):
-    #     counsellor = obj.bookingcounsellor_set.first()
-
-    #     if counsellor:
-    #         return f"{counsellor.counsellor.user.first_name} {counsellor.counsellor.user.last_name}"
-    #     return None
-    
+    # =========================================================
+    # COUNSELLOR NAME
+    # =========================================================
     def get_counsellor_name(self, obj):
-        counsellors = obj.bookingcounsellor_set.all()
+
+        counsellors = (
+            obj.bookingcounsellor_set.all()
+        )
 
         counsellor_list = []
+
         for counsellor in counsellors:
-            counsellor_list.append({
-                "counsellor_id": counsellor.counsellor.id,
-                "counsellor_name": f"{counsellor.counsellor.user.first_name} {counsellor.counsellor.user.last_name}",
-                "role": counsellor.role
-            })
+
+            counsellor_list.append(
+                {
+                    "counsellor_id": (
+                        counsellor.counsellor.id
+                    ),
+
+                    "counsellor_name": (
+                        f"{counsellor.counsellor.user.first_name} "
+                        f"{counsellor.counsellor.user.last_name}"
+                    ).strip(),
+
+                    "role": counsellor.role
+                }
+            )
 
         return counsellor_list
 
+    # =========================================================
+    # ROLE
+    # =========================================================
     def get_role(self, obj):
-        counsellor = obj.bookingcounsellor_set.filter(
-            counsellor__user=self.context["request"].user
-        ).first()
+
+        counsellor = (
+            obj.bookingcounsellor_set
+            .filter(
+                counsellor__user=self.context["request"].user
+            )
+            .first()
+        )
 
         if counsellor:
             return counsellor.role
+
         return None
 
+    # =========================================================
+    # SLOT TIME
+    # =========================================================
     def get_slot_time(self, obj):
+
         if obj.slot:
             return f"{obj.slot.start_time}"
+
         return None
-    
+
+    # =========================================================
+    # APTITUDE TEST
+    # =========================================================
     def get_aptitude_test(self, obj):
+
         student_user = obj.student.user
 
-        return UserProgramPackage.objects.filter(
-            user=student_user,
-            package__aptitude_test=True
-        ).exists()
-        
+        return (
+            UserProgramPackage.objects
+            .filter(
+                user=student_user,
+                package__aptitude_test=True
+            )
+            .exists()
+        )
+
+    # =========================================================
+    # ENGINEERING TEST ANALYSIS
+    # =========================================================
     def get_engineering_test_analysis(self, obj):
+
         student_user = obj.student.user
 
-        return UserProgramPackage.objects.filter(
-            user=student_user,
-            package__engineering_test_analysis=True
-        ).exists()
+        return (
+            UserProgramPackage.objects
+            .filter(
+                user=student_user,
+                package__engineering_test_analysis=True
+            )
+            .exists()
+        )
     
 class CounsellingNoteSerializer(serializers.ModelSerializer):
 
