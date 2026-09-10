@@ -2734,216 +2734,248 @@ class StudentBookingListAPIView(APIView):
 class CounsellorStudentBookingListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    # def auto_complete_bookings(self):
-    #     now = timezone.now()
-
-    #     bookings = Booking.objects.filter(
-    #         status="booked",
-    #         slot__isnull=False
-    #     ).select_related("slot")
-
-    #     for booking in bookings:
-
-    #         end_time = booking.slot.end_time
-
-    #         # convert string → time safely
-    #         if isinstance(end_time, str):
-    #             try:
-    #                 end_time = datetime.strptime(
-    #                     end_time,
-    #                     "%I:%M %p"
-    #                 ).time()
-    #             except ValueError:
-    #                 end_time = datetime.strptime(
-    #                     end_time,
-    #                     "%H:%M:%S"
-    #                 ).time()
-
-    #         # combine date + time
-    #         end_datetime = datetime.combine(
-    #             booking.date,
-    #             end_time
-    #         )
-
-    #         # timezone safe
-    #         end_datetime = timezone.make_aware(
-    #             end_datetime,
-    #             timezone.get_current_timezone()
-    #         )
-
-    #         if timezone.is_naive(now):
-    #             now = timezone.make_aware(
-    #                 now,
-    #                 timezone.get_current_timezone()
-    #             )
-
-    #         if now >= (end_datetime - timedelta(minutes=30)):
-    #             booking.status = "completed"
-    #             booking.save(update_fields=["status"])
-
     def auto_complete_bookings(self):
+        """
+        Automatically change booking status from 'booked'
+        to 'completed' after 1 hour 30 minutes from
+        the booking start time.
+        """
+
+        # =========================================================
+        # CURRENT TIME
+        # =========================================================
         now = timezone.now()
 
-        bookings = Booking.objects.filter(
-            status="booked",
-            slot__isnull=False
-        ).select_related("slot")
+        current_timezone = timezone.get_current_timezone()
 
+        # Make sure now is timezone-aware
+        if timezone.is_naive(now):
+            now = timezone.make_aware(
+                now,
+                current_timezone
+            )
+
+        # =========================================================
+        # GET BOOKED BOOKINGS
+        # =========================================================
+        bookings = (
+            Booking.objects
+            .filter(
+                status="booked",
+                slot__isnull=False
+            )
+            .select_related("slot")
+        )
+
+        # =========================================================
+        # CHECK EACH BOOKING
+        # =========================================================
         for booking in bookings:
 
-            start_time = booking.slot.start_time
+            try:
 
-            # convert string → time safely
-            if isinstance(start_time, str):
-                try:
-                    start_time = datetime.strptime(
-                        start_time,
-                        "%I:%M %p"
-                    ).time()
-                except ValueError:
+                start_time = booking.slot.start_time
+
+                # =====================================================
+                # CONVERT SLOT TIME TO Python time
+                # =====================================================
+                if isinstance(start_time, str):
+
                     try:
+                        # Example: 03:30 PM
                         start_time = datetime.strptime(
-                            start_time,
-                            "%H:%M:%S"
+                            start_time.strip(),
+                            "%I:%M %p"
                         ).time()
+
                     except ValueError:
-                        start_time = datetime.strptime(
-                            start_time,
-                            "%H:%M"
-                        ).time()
 
-            start_datetime = datetime.combine(
-                booking.date,
-                start_time
-            )
+                        try:
+                            # Example: 15:30:00
+                            start_time = datetime.strptime(
+                                start_time.strip(),
+                                "%H:%M:%S"
+                            ).time()
 
-            # Convert only if naive
-            if timezone.is_naive(start_datetime):
-                start_datetime = timezone.make_aware(
-                    start_datetime,
-                    timezone.get_current_timezone()
+                        except ValueError:
+
+                            # Example: 15:30
+                            start_time = datetime.strptime(
+                                start_time.strip(),
+                                "%H:%M"
+                            ).time()
+
+                # =====================================================
+                # CREATE START DATETIME
+                # =====================================================
+                start_datetime = datetime.combine(
+                    booking.date,
+                    start_time
                 )
 
-            # auto complete after 1.5 hours
-            auto_complete_time = start_datetime + timedelta(
-                hours=1,
-                minutes=30
-            )
+                # =====================================================
+                # MAKE START DATETIME TIMEZONE-AWARE
+                # =====================================================
+                if timezone.is_naive(start_datetime):
 
-            now = timezone.now()
+                    start_datetime = timezone.make_aware(
+                        start_datetime,
+                        current_timezone
+                    )
 
-            if timezone.is_naive(now):
-                now = timezone.make_aware(
-                    now,
-                    timezone.get_current_timezone()
+                # =====================================================
+                # AUTO COMPLETE AFTER 1 HOUR 30 MINUTES
+                # =====================================================
+                auto_complete_time = (
+                    start_datetime
+                    + timedelta(
+                        hours=1,
+                        minutes=30
+                    )
                 )
 
-            if now >= auto_complete_time:
-                booking.status = "completed"
-                booking.save(update_fields=["status"])
+                # =====================================================
+                # FINAL SAFETY CHECK
+                # Both MUST be timezone-aware
+                # =====================================================
+                if timezone.is_naive(auto_complete_time):
 
-    
+                    auto_complete_time = timezone.make_aware(
+                        auto_complete_time,
+                        current_timezone
+                    )
 
+                if timezone.is_naive(now):
+
+                    now = timezone.make_aware(
+                        now,
+                        current_timezone
+                    )
+
+                # =====================================================
+                # AUTO COMPLETE
+                # =====================================================
+                if now >= auto_complete_time:
+
+                    booking.status = "completed"
+
+                    booking.save(
+                        update_fields=["status"]
+                    )
+
+                    print(
+                        f"Booking {booking.id} automatically "
+                        f"marked as completed."
+                    )
+
+            except Exception as e:
+
+                print(
+                    f"Error processing booking "
+                    f"{booking.id}: {str(e)}"
+                )
+                
+            
     def get(self, request):
 
         # ==========================================
-        # 🔹 AUTO UPDATE
+        # AUTO UPDATE BOOKINGS
         # ==========================================
         self.auto_complete_bookings()
 
-        bookings = Booking.objects.filter(
-            bookingcounsellor__counsellor__user=request.user,
-            status__in=["booked", "completed", "rescheduled"]
-        ).select_related(
-            "student__user",
-            "slot"
-        ).prefetch_related(
-            "bookingcounsellor_set__counsellor__user"
-        ).distinct().order_by("-date")
+        # ==========================================
+        # GET COUNSELLOR BOOKINGS
+        # ==========================================
+        bookings = (
+            Booking.objects
+            .filter(
+                bookingcounsellor__counsellor__user=request.user,
+                status__in=[
+                    "booked",
+                    "completed",
+                    "rescheduled"
+                ]
+            )
+            .select_related(
+                "student__user",
+                "slot"
+            )
+            .prefetch_related(
+                "bookingcounsellor_set__counsellor__user"
+            )
+            .distinct()
+            .order_by("-date")
+        )
 
         # ==========================================
-        # 🔹 SERIALIZER DATA
+        # SERIALIZER
         # ==========================================
         serializer = CounsellorStudentBookingSerializer(
             bookings,
             many=True,
-            context={"request": request}
+            context={
+                "request": request
+            }
         )
 
         response_data = serializer.data
 
         # ==========================================
-        # 🔹 ADD FILE DETAILS WITHOUT CHANGING RESPONSE
+        # ADD REPORT FILE DETAILS
         # ==========================================
-        for item, booking in zip(response_data, bookings):
+        for item, booking in zip(
+            response_data,
+            bookings
+        ):
 
             report = (
                 Report.objects
-                .filter(user=booking.student.user)
+                .filter(
+                    user=booking.student.user
+                )
                 .order_by("-uploaded_at")
                 .first()
             )
 
-            # file_url = None
-            # file_name = None
-
-            # if report and report.file_path:
-            #     try:
-            #         # Actual uploaded filename
-            #         file_name = os.path.basename(
-            #             report.file_path.name
-            #         )
-
-            #         # File extension
-            #         file_extension = os.path.splitext(
-            #             file_name
-            #         )[1].lower()
-
-            #         # ==========================================
-            #         # PDF → Preview
-            #         # ==========================================
-            #         if file_extension == ".pdf":
-            #             file_url = request.build_absolute_uri(
-            #                 f"/api/report/report/pdf/{report.id}/"
-            #             )
-
-            #         # ==========================================
-            #         # Other files → Direct media
-            #         # ==========================================
-            #         else:
-            #             file_url = request.build_absolute_uri(
-            #                 report.file_path.url
-            #             )
-
-            #     except Exception:
-            #         file_url = None
-            #         file_name = None
-            
             file_url = None
             file_name = None
 
-            if report.file_path:
-                try:
-                    # ✅ Actual uploaded file name
-                    file_name = os.path.basename(report.file_path.name)
+            # IMPORTANT:
+            # Report may not exist for every student.
+            if report and report.file_path:
 
-                    # ✅ ALL FILE TYPES use same API
+                try:
+
+                    # Actual uploaded filename
+                    file_name = os.path.basename(
+                        report.file_path.name
+                    )
+
+                    # All file types use same secure API
                     file_url = request.build_absolute_uri(
                         f"/api/report/report/pdf/{report.id}/"
                     )
 
-                except Exception:
+                except Exception as e:
+
+                    print(
+                        f"Error getting report file "
+                        f"for report {report.id}: {str(e)}"
+                    )
+
                     file_url = None
                     file_name = None
 
             # ==========================================
-            # 🔹 APPEND TO EXISTING RESPONSE
+            # ADD FILE DETAILS TO RESPONSE
             # ==========================================
             item["file_path"] = file_url
             item["file_name"] = file_name
 
-        return Response(response_data)
-
+        return Response(
+            response_data,
+            status=status.HTTP_200_OK
+        )
 
 class CounsellorCompletedStudentBookingListAPIView(APIView):
     permission_classes = [IsAuthenticated]
