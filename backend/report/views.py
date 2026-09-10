@@ -834,25 +834,52 @@ class ReportPDFView(APIView):
 # class UploadReportAPIView(APIView):
 #     """
 #     Upload or replace a report file.
-#     If latest payment is fully_paid → report received_unlocked
-#     If partial_paid or no payment → report received_locked
+
+#     ✅ Unlock ONLY if:
+#        - Payment is fully_paid
+#        - Review entry exists for user
+#        - Review status = submitted
+
+#     ❌ Else:
+#        - received_locked
 #     """
+
 #     permission_classes = [IsAuthenticated]
 
 #     def handle_upload(self, request, report_id):
 
-#         report = get_object_or_404(Report, id=report_id)
+#         # =========================
+#         # 🔎 Get Report
+#         # =========================
+#         report = get_object_or_404(
+#             Report,
+#             id=report_id
+#         )
+
 #         user = report.user
 
+#         # =========================
+#         # 📂 Validate File
+#         # =========================
 #         file_path = request.FILES.get("file_path")
 
 #         if not file_path:
 #             return Response(
-#                 {"message": "Report file is required"},
+#                 {
+#                     "message": "Report file is required"
+#                 },
 #                 status=status.HTTP_400_BAD_REQUEST
 #             )
 
-#         # 🔎 Get latest payment
+#         # ✅ Terminal log for uploaded file
+#         print("📤 Report Upload Started:")
+#         print(f"   File Name: {file_path.name}")
+#         print(f"   File Size: {file_path.size} bytes")
+#         print(f"   File Type: {file_path.content_type}")
+
+#         # =========================
+#         # 💳 Latest Payment
+#         # =========================
 #         latest_payment = (
 #             Payment.objects
 #             .filter(user=user)
@@ -860,81 +887,216 @@ class ReportPDFView(APIView):
 #             .first()
 #         )
 
-#         # ✅ Default locked
+#         # =========================
+#         # 📝 Review Check
+#         # Must exist + submitted
+#         # =========================
+#         submitted_review = (
+#             Review.objects
+#             .filter(
+#                 user=user,
+#                 review_status="submitted"
+#             )
+#             .order_by('-created_at')
+#             .first()
+#         )
+
+#         # # =========================
+#         # # 🔒 Default Locked
+#         # # =========================
+#         # report_status = "received_locked"
+
+#         # # =========================
+#         # # 🔓 Unlock Rule
+#         # # =========================
+#         # if (
+#         #     latest_payment
+#         #     and latest_payment.status == "fully_paid"
+#         #     and submitted_review
+#         # ):
+#         #     report_status = "received_unlocked"
+#         # =========================
+#         # 🎓 Student Profile
+#         # =========================
+#         student_profile = (
+#             StudentProfile.objects
+#             .filter(user=user)
+#             .first()
+#         )
+#         # =========================
+#         # 🔒 Default Locked
+#         # =========================
 #         report_status = "received_locked"
 
-#         # ✅ Unlock only if fully paid
-#         if latest_payment and latest_payment.status == "fully_paid":
+#         # =========================
+#         # 📅 Latest Booking Status
+#         # =========================
+#         latest_booking = None
+
+#         if student_profile:
+#             latest_booking = (
+#                 Booking.objects
+#                 .filter(student=student_profile)
+#                 .order_by("-id")
+#                 .first()
+#             )
+
+#         # =========================
+#         # 🔓 Unlock Rule
+#         # Must have:
+#         # - fully_paid payment
+#         # - submitted review
+#         # - completed booking
+#         # =========================
+#         if (
+#             latest_payment
+#             and latest_payment.status == "fully_paid"
+#             and submitted_review
+#             and latest_booking
+#             and latest_booking.status == "completed"
+#         ):
 #             report_status = "received_unlocked"
 
-#         # -------------------------
-#         # Save Report
-#         # -------------------------
+#         # =========================
+#         # 💾 Save Report
+#         # =========================
 #         report.file_path = file_path
 #         report.uploaded_by = request.user
 #         report.uploaded_at = timezone.now()
 #         report.report_status = report_status
 #         report.save()
+
+#         # =========================
+#         # 📧 Send Email
+#         # =========================
+#         send_report_uploaded_email(
+#             user,
+#             report
+#         )
+
+#         # =========================
+#         # 🎓 Student Profile
+#         # =========================
+#         student_profile = (
+#             StudentProfile.objects
+#             .filter(user=user)
+#             .first()
+#         )
+
+#         # # =========================
+#         # # 📅 Booking
+#         # # =========================
+#         # booking = None
+#         # created = False
+
+#         # if student_profile:
+#         #     booking, created = Booking.objects.get_or_create(
+#         #         student=student_profile,
+#         #         defaults={
+#         #             "status": "not_booked"
+#         #         }
+#         #     )
         
-#         # Send email
-#         send_report_uploaded_email(user, report)
-
-#         # -------------------------
-#         # CREATE BOOKING IF NOT EXISTS
-#         # -------------------------
-#         student_profile = StudentProfile.objects.filter(
-#             user=user
-#         ).first()
-
+#         # =========================
+#         # 📅 Booking
+#         # =========================
 #         booking = None
+#         created = False
 
 #         if student_profile:
-#             booking, created = Booking.objects.get_or_create(
-#                 student=student_profile,
-#                 defaults={
-#                     "status": "not_booked"
-#                 }
+
+#             # ✅ Get latest booking if multiple exist
+#             booking = (
+#                 Booking.objects
+#                 .filter(student=student_profile)
+#                 .order_by("-id")
+#                 .first()
 #             )
 
+#             # ✅ Create only if no booking exists
+#             if not booking:
+#                 booking = Booking.objects.create(
+#                     student=student_profile,
+#                     status="not_booked"
+#                 )
+#                 created = True
+
+#         # =========================
+#         # 📤 Response
+#         # =========================
 #         return Response(
 #             {
 #                 "message": "Report uploaded successfully",
+
 #                 "report_id": report.id,
+
 #                 "uploaded_at": report.uploaded_at,
+
 #                 "report_status": report.report_status,
-#                 "payment_status": latest_payment.status if latest_payment else None,
-#                 "booking_created": created if student_profile else False
+
+#                 "payment_status": (
+#                     latest_payment.status
+#                     if latest_payment
+#                     else None
+#                 ),
+
+#                 "review_exists": bool(submitted_review),
+
+#                 "review_status": (
+#                     submitted_review.review_status
+#                     if submitted_review
+#                     else None
+#                 ),
+
+#                 "booking_created": (
+#                     created
+#                     if student_profile
+#                     else False
+#                 )
 #             },
 #             status=status.HTTP_200_OK
 #         )
 
+#     # =========================
+#     # 🔹 POST
+#     # =========================
 #     def post(self, request, report_id):
-#         return self.handle_upload(request, report_id)
+#         return self.handle_upload(
+#             request,
+#             report_id
+#         )
 
+#     # =========================
+#     # 🔹 PUT
+#     # =========================
 #     def put(self, request, report_id):
-#         return self.handle_upload(request, report_id)
-
-
+#         return self.handle_upload(
+#             request,
+#             report_id
+#         )    
+  
 class UploadReportAPIView(APIView):
     """
     Upload or replace a report file.
 
-    ✅ Unlock ONLY if:
-       - Payment is fully_paid
-       - Review entry exists for user
-       - Review status = submitted
+    Report Status:
 
-    ❌ Else:
-       - received_locked
+    received_unlocked:
+        - Payment status = fully_paid
+        - Review exists and status = submitted
+        - Latest booking status = completed
+
+    received_locked:
+        - If any of the above conditions are not satisfied
     """
 
     permission_classes = [IsAuthenticated]
 
     def handle_upload(self, request, report_id):
 
-        # =========================
-        # 🔎 Get Report
-        # =========================
+        # =========================================================
+        # 1. GET REPORT
+        # =========================================================
         report = get_object_or_404(
             Report,
             id=report_id
@@ -942,96 +1104,88 @@ class UploadReportAPIView(APIView):
 
         user = report.user
 
-        # =========================
-        # 📂 Validate File
-        # =========================
-        file_path = request.FILES.get("file_path")
+        # =========================================================
+        # 2. GET UPLOADED FILE
+        # =========================================================
+        uploaded_file = request.FILES.get("file_path")
 
-        if not file_path:
+        if not uploaded_file:
             return Response(
                 {
+                    "success": False,
                     "message": "Report file is required"
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # ✅ Terminal log for uploaded file
-        print("📤 Report Upload Started:")
-        print(f"   File Name: {file_path.name}")
-        print(f"   File Size: {file_path.size} bytes")
-        print(f"   File Type: {file_path.content_type}")
+        # =========================================================
+        # 3. FILE LOG
+        # =========================================================
+        print("========================================")
+        print("REPORT UPLOAD STARTED")
+        print("========================================")
+        print(f"Report ID  : {report.id}")
+        print(f"User ID    : {user.id}")
+        print(f"File Name  : {uploaded_file.name}")
+        print(f"File Size  : {uploaded_file.size} bytes")
+        print(f"File Type  : {uploaded_file.content_type}")
+        print("========================================")
 
-        # =========================
-        # 💳 Latest Payment
-        # =========================
+        # =========================================================
+        # 4. LATEST PAYMENT
+        # =========================================================
         latest_payment = (
             Payment.objects
             .filter(user=user)
-            .order_by('-created_at')
+            .order_by("-created_at")
             .first()
         )
 
-        # =========================
-        # 📝 Review Check
-        # Must exist + submitted
-        # =========================
+        # =========================================================
+        # 5. SUBMITTED REVIEW
+        # =========================================================
         submitted_review = (
             Review.objects
             .filter(
                 user=user,
                 review_status="submitted"
             )
-            .order_by('-created_at')
+            .order_by("-created_at")
             .first()
         )
 
-        # # =========================
-        # # 🔒 Default Locked
-        # # =========================
-        # report_status = "received_locked"
-
-        # # =========================
-        # # 🔓 Unlock Rule
-        # # =========================
-        # if (
-        #     latest_payment
-        #     and latest_payment.status == "fully_paid"
-        #     and submitted_review
-        # ):
-        #     report_status = "received_unlocked"
-        # =========================
-        # 🎓 Student Profile
-        # =========================
+        # =========================================================
+        # 6. STUDENT PROFILE
+        # =========================================================
         student_profile = (
             StudentProfile.objects
             .filter(user=user)
             .first()
         )
-        # =========================
-        # 🔒 Default Locked
-        # =========================
-        report_status = "received_locked"
 
-        # =========================
-        # 📅 Latest Booking Status
-        # =========================
+        # =========================================================
+        # 7. LATEST BOOKING
+        # =========================================================
         latest_booking = None
 
         if student_profile:
             latest_booking = (
                 Booking.objects
-                .filter(student=student_profile)
+                .filter(
+                    student=student_profile
+                )
                 .order_by("-id")
                 .first()
             )
 
-        # =========================
-        # 🔓 Unlock Rule
-        # Must have:
-        # - fully_paid payment
-        # - submitted review
-        # - completed booking
-        # =========================
+        # =========================================================
+        # 8. DEFAULT REPORT STATUS
+        # =========================================================
+        report_status = "received_locked"
+
+        # =========================================================
+        # 9. UNLOCK CONDITION
+        # =========================================================
         if (
             latest_payment
             and latest_payment.status == "fully_paid"
@@ -1041,75 +1195,111 @@ class UploadReportAPIView(APIView):
         ):
             report_status = "received_unlocked"
 
-        # =========================
-        # 💾 Save Report
-        # =========================
-        report.file_path = file_path
-        report.uploaded_by = request.user
-        report.uploaded_at = timezone.now()
-        report.report_status = report_status
-        report.save()
+        # =========================================================
+        # 10. SAVE REPORT FILE
+        # =========================================================
+        try:
 
-        # =========================
-        # 📧 Send Email
-        # =========================
-        send_report_uploaded_email(
-            user,
-            report
-        )
+            print("Saving report file...")
 
-        # =========================
-        # 🎓 Student Profile
-        # =========================
-        student_profile = (
-            StudentProfile.objects
-            .filter(user=user)
-            .first()
-        )
+            report.file_path = uploaded_file
+            report.uploaded_by = request.user
+            report.uploaded_at = timezone.now()
+            report.report_status = report_status
 
-        # # =========================
-        # # 📅 Booking
-        # # =========================
-        # booking = None
-        # created = False
+            report.save()
 
-        # if student_profile:
-        #     booking, created = Booking.objects.get_or_create(
-        #         student=student_profile,
-        #         defaults={
-        #             "status": "not_booked"
-        #         }
-        #     )
-        
-        # =========================
-        # 📅 Booking
-        # =========================
-        booking = None
-        created = False
+            print("Report saved successfully")
+
+            if report.file_path:
+                print(
+                    f"Saved File Path: {report.file_path.name}"
+                )
+
+        except Exception as e:
+
+            print("========================================")
+            print("REPORT FILE SAVE FAILED")
+            print("========================================")
+            print(f"Error Type : {type(e).__name__}")
+            print(f"Error      : {str(e)}")
+            print("========================================")
+
+            return Response(
+                {
+                    "success": False,
+                    "message": "Unable to save report file",
+                    "error": str(e)
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        # =========================================================
+        # 11. SEND EMAIL
+        # =========================================================
+        email_sent = False
+        email_error = None
+
+        try:
+
+            send_report_uploaded_email(
+                user,
+                report
+            )
+
+            email_sent = True
+
+            print(
+                "Report upload email sent successfully"
+            )
+
+        except Exception as e:
+
+            email_error = str(e)
+
+            print("========================================")
+            print("REPORT EMAIL FAILED")
+            print("========================================")
+            print(f"Error Type : {type(e).__name__}")
+            print(f"Error      : {str(e)}")
+            print("========================================")
+
+        # =========================================================
+        # 12. CREATE BOOKING ONLY IF NO BOOKING EXISTS
+        # =========================================================
+        booking_created = False
 
         if student_profile:
 
-            # ✅ Get latest booking if multiple exist
             booking = (
                 Booking.objects
-                .filter(student=student_profile)
+                .filter(
+                    student=student_profile
+                )
                 .order_by("-id")
                 .first()
             )
 
-            # ✅ Create only if no booking exists
             if not booking:
-                booking = Booking.objects.create(
+
+                Booking.objects.create(
                     student=student_profile,
                     status="not_booked"
                 )
-                created = True
 
-        # =========================
-        # 📤 Response
-        # =========================
+                booking_created = True
+
+                print(
+                    f"Booking created for student "
+                    f"{student_profile.id}"
+                )
+
+        # =========================================================
+        # 13. RESPONSE
+        # =========================================================
         return Response(
             {
+                "success": True,
                 "message": "Report uploaded successfully",
 
                 "report_id": report.id,
@@ -1124,7 +1314,9 @@ class UploadReportAPIView(APIView):
                     else None
                 ),
 
-                "review_exists": bool(submitted_review),
+                "review_exists": bool(
+                    submitted_review
+                ),
 
                 "review_status": (
                     submitted_review.review_status
@@ -1132,33 +1324,38 @@ class UploadReportAPIView(APIView):
                     else None
                 ),
 
-                "booking_created": (
-                    created
-                    if student_profile
-                    else False
-                )
+                "booking_created": booking_created,
+
+                "email_sent": email_sent,
+
+                "email_error": email_error
             },
             status=status.HTTP_200_OK
         )
 
-    # =========================
-    # 🔹 POST
-    # =========================
+    # =============================================================
+    # POST
+    # =============================================================
     def post(self, request, report_id):
+
         return self.handle_upload(
             request,
             report_id
         )
+        
 
-    # =========================
-    # 🔹 PUT
-    # =========================
+    # =============================================================
+    # PUT
+    # =============================================================
     def put(self, request, report_id):
+
         return self.handle_upload(
             request,
             report_id
-        )    
+        )   
     
+ 
+  
         
 class CompletedExamReportExportExcelAPIView(APIView):
     permission_classes = [IsAuthenticated]
