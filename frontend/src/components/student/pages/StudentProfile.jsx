@@ -622,12 +622,12 @@ const StudentProfile = () => {
           </Col>
 
           <Col xs={24} sm={24} md={12}>
-            <Text>Program</Text>
+            <Text>Therapy</Text>
             <Input value={profile.program} onChange={(e) => handleChange("program", e.target.value)} disabled />
           </Col>
 
           <Col xs={24} sm={24} md={12}>
-            <Text>Counselling Service</Text>
+            <Text>Treatment</Text>
             <Input
               value={profile.counselling_service}
               onChange={(e) =>

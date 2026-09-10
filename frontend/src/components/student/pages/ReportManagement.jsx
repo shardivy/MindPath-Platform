@@ -472,7 +472,7 @@ const ReportManagement = () => {
       }}
     >
       <Row justify="space-between">
-        <Title level={5}>Aptitude Test Report</Title>
+        <Title level={5}>Assessment Report</Title>
         <Tag color="orange">Pending Upload</Tag>
       </Row>
 
@@ -568,7 +568,7 @@ const ReportManagement = () => {
                 <Col xs={24} md={10} key={report.id}>
                   <ReportCard
                     report={report}
-                    title="Aptitude Test Report"
+                    title="Assessment Report"
                     //  locked={report.report_status !== "received_unlocked"}
                     //   reason={
                     //     report.payment_status !== "fully_paid"

@@ -265,7 +265,7 @@ const Program = () => {
 
   // Update title text based on user type
   const titleText = !isFreeUser && profile?.program
-    ? "Your Selected Counselling Program"
+    ? "Your Selected Therapy"
     : "Choose Your Career Path";
 
   // Show free user message if applicable
@@ -673,7 +673,7 @@ const Program = () => {
           {selectedProgram && (
             <div>
               <Title level={screens.xs ? 4 : 3} style={{ textAlign: "center", marginBottom: screens.xs ? 20 : 30 }}>
-                Selected Counselling Services
+                Selected Treatment
               </Title>
 
               <Row gutter={[screens.xs ? 16 : 24, screens.xs ? 16 : 24]} justify="center">

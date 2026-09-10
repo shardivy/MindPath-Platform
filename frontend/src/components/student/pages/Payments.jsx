@@ -148,7 +148,7 @@ const Payments = () => {
       width: 80,
     },
     {
-      title: "Program / Counselling Service",
+      title: "Therapy / Treatment",
       width: 220,
       render: (_, record) => (
         <div>

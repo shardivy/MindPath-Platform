@@ -182,19 +182,19 @@ export default function StudentLayout() {
   /* ===================== BREADCRUMB ===================== */
   const breadcrumbNameMap = {
     "/student/dashboard": "Dashboard",
-    "/student/program": "Program & Services",
-    "/student/exam-management": "Career Assessment",
+    "/student/program": "Therapy & Treatment",
+    "/student/exam-management": "Assessment Management",
     "/student/report-management": "Assessment Reports",
-    "/student/slot-booking": "Book Appointment",
+    "/student/slot-booking": "Book Session",
     "/student/freecontent": "Free Content",
-    "/student/content-library": "Career Library",
+    "/student/content-library": "Content Library",
     "/student/student-profile": "Profile",
     "/student/payments": "Payments",
     "/student/payment-page": "Payment",
     "/student/engineering-questionnaires": "Engineering Questionnaires",
     "/student/analysis-report": "Analysis Report",
     "/student/write-review": "Write a Review",
-    "/student/program-selection": "Program Selection",
+    "/student/program-selection": "Therapy Selection",
   };
 
   const pathSnippets = location.pathname.split("/").filter(Boolean);
@@ -226,7 +226,7 @@ export default function StudentLayout() {
     {
       key: "/student/program",
       icon: <ReadFilled />,
-      label: "Program & Services",
+      label: "Therapy & Treatment",
       onClick: () => {
         navigate("/student/program");
         setDrawerVisible(false);
@@ -239,7 +239,7 @@ export default function StudentLayout() {
   const contentLibraryItem = {
     key: "/student/content-library",
     icon: <BookFilled />,
-    label: "Career Library",
+    label: "Content Library",
     onClick: () => {
       navigate("/student/content-library");
       setDrawerVisible(false);
@@ -295,8 +295,8 @@ export default function StudentLayout() {
           icon: <CalendarFilled />,
           label: (
             <div style={{ lineHeight: "20px" }}>
-              <div>Career Assessment</div>
-              {/* <div>Management</div> */}
+              <div>Assessment</div>
+              <div>Management</div>
             </div>
           ),
           onClick: () => {
@@ -314,7 +314,7 @@ export default function StudentLayout() {
                 icon: <ScheduleFilled />,
                 label: (
                   <div style={{ lineHeight: "20px" }}>
-                    <div>Book Appointment</div>
+                    <div>Book Session</div>
                     {/* <div>Slot Booking</div> */}
                   </div>
                 ),
@@ -377,7 +377,7 @@ export default function StudentLayout() {
                 icon: <ScheduleFilled />,
                 label: (
                   <div style={{ lineHeight: "20px" }}>
-                    <div>Book Appointment</div>
+                    <div>Book Session</div>
                     {/* <div>Slot Booking</div> */}
                   </div>
                 ),

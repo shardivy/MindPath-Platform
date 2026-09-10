@@ -231,7 +231,7 @@ const isReportAvailable =
       >
         <Col span={24} style={{ textAlign: "center", marginBottom: 16 }}>
           <Title level={2} style={{ margin: 0 }}>
-            My Appointments
+            My Session
           </Title>
           <Text type="colorTextSecondary">
             <br />
@@ -265,7 +265,7 @@ const isReportAvailable =
           <Empty
             description={
               <Text type="colorTextSecondary">
-                Counselling sessions are currently unavailable.
+                sessions are currently unavailable.
                 <br />
                 You will be able to book a slot once your report is uploaded.
               </Text>
@@ -293,7 +293,7 @@ const isReportAvailable =
               <Text type="secondary">
                 No sessions found.
                 <br />
-                You can book your counselling session now.
+                You can book your session now.
               </Text>
             }
           />
@@ -524,10 +524,10 @@ const isReportAvailable =
         <div style={{ padding: 2 }}>
           <div style={{ marginBottom: 20 }}>
             <Title level={4} style={{ marginBottom: 6, color: "#111827" }}>
-              📍 Counselling Office
+              📍 Session Office
             </Title>
             <Text type="seccolorTextSecondaryondary">
-              Please arrive on time for your offline counselling session
+              Please arrive on time for your offline session
             </Text>
           </div>
 

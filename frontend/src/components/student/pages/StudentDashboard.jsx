@@ -177,7 +177,7 @@ const StudentDashboard = () => {
     // ================= EXAM FLOW =================
     if (showExamAndReport && progressData.exam !== "completed") {
       return {
-        label: "Start Exam →",
+        label: "Start Assessment →",
         path: "/student/exam-management",
       };
     }
@@ -189,7 +189,7 @@ const StudentDashboard = () => {
         progressData.counselling_slot_booking === "not_booked")
     ) {
       return {
-        label: "Book Counselling Session →",
+        label: "Book Session →",
         path: "/student/slot-booking",
       };
     }
@@ -234,7 +234,7 @@ const StudentDashboard = () => {
         progressData.counselling_slot_booking === "not_booked")
     ) {
       return {
-        label: "Book Counselling Session →",
+        label: "Book Session →",
         path: "/student/slot-booking",
       };
     }
@@ -427,7 +427,7 @@ const StudentDashboard = () => {
               style={{ fontSize: 26, color: token.colorPrimary }}
             />
             <Title level={5} style={{ marginTop: 16 }}>
-              My Program
+              My Therapy & Treatment
             </Title>
           </Card>
         </Col>

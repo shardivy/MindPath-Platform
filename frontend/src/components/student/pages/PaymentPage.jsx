@@ -259,7 +259,7 @@ const PaymentPage = () => {
                   message="Important Payment Instruction"
                   description={
                     <Text>
-                      If you opt for <b>online counselling session</b>, please pay the complete{" "}
+                      If you opt for <b>online session</b>, please pay the complete{" "}
                       <b>
                         {isFreeUser ? (
                           historyLoading ? (
@@ -273,7 +273,7 @@ const PaymentPage = () => {
                         /-
                       </b>.{" "}
 
-                      If you wish to take <b>offline counselling at Bavdhan, Pune</b>, just pay{" "}
+                      If you wish to take <b>offline session at Bavdhan, Pune</b>, just pay{" "}
                       <b>₹{offlineAdvance}/-</b> now and the remaining{" "}
                       <b>₹{offlineRemaining}/-</b> can be paid in cash during the offline session.
                     </Text>

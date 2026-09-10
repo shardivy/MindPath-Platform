@@ -6,7 +6,7 @@ import { startReviewByStudent, submitReviewByStudent, getReviewStatus  } from ".
 const { Title, Text } = Typography;
 
 const GOOGLE_REVIEW_URL =
-  "https://g.page/Abhinav-career-scope-pune/review?np";
+  "#";
 
 const suggestions = [
   "Great career guidance and very helpful counselors!",

@@ -57,7 +57,7 @@ const journeySteps =
     "Registration",
     "Treatment Selection",
     "Payment",
-    // "Assessment",
+    "Assessment",
     "Questionnaire",
     "Analysis Report",
     "Session Booking",
@@ -261,7 +261,7 @@ const UserProfileModal = ({ open, onClose, user }) => {
                 const isPartialReportStep = label === "Partial Report";
                 const isFullReportStep = label === "Full Report";
                 // Hide Exam & Report for programs other than Aptitude & PG
-                if (!showExamReport && (label === "Exam" || label === "Report")) {
+                if (!showExamReport && (label === "Assessment" || label === "Report")) {
                   return null;
                 }
 
@@ -278,15 +278,15 @@ const UserProfileModal = ({ open, onClose, user }) => {
                 const stepNo = index + 1;
                 // const isPaymentStep = stepNo === 3;
                 const isPaymentStep = label === "Payment";
-                const isExamStep = label === "Exam";
+                const isExamStep = label === "Assessment";
                 const isReportStep = label === "Report";
                 const isActive = stepNo === currentStep;
 
                 const isCompleted =
                   (label === "Registration" && progressData.registration) ||
-                  (label === "Counselling Service Selection" && progressData.counselling_service) ||
+                  (label === "Treatment Selection" && progressData.counselling_service) ||
                   (label === "Payment" && progressData.payment === "fully_paid") ||
-                  (label === "Exam" && progressData.exam === "completed") ||
+                  (label === "Assessment" && progressData.exam === "completed") ||
                   (label === "Report" && progressData.report === "received_unlocked") ||
                   (label === "Questionnaire" &&
                     (progressData.analysis === "completed" || progressData.analysis === "in_progress")) ||
@@ -294,7 +294,7 @@ const UserProfileModal = ({ open, onClose, user }) => {
                   (label === "Analysis Report" &&
                     progressData.analysis === "completed") ||
 
-                  (label === "Counselling Slot Booking" &&
+                  (label === "Session Booking" &&
                     ["booked", "rescheduled", "completed"].includes(
                       progressData.counselling_slot_booking
                     )) ||
@@ -444,10 +444,10 @@ const UserProfileModal = ({ open, onClose, user }) => {
                     const status = item.status?.toLowerCase();
 
                     if (!status || status === "pending") return false;
-                    if (item.step === "Counselling Slot Booking" && status === "not_booked") {
+                    if (item.step === "Session Booking" && status === "not_booked") {
                       return false;
                     }
-                    if (item.step === "Exam" && progressData.exam === "not_applicable") {
+                    if (item.step === "Assessment" && progressData.exam === "not_applicable") {
                       return false;
                     }
                     if (item.step === "Report" && progressData.report === "not_applicable") {
@@ -459,7 +459,7 @@ const UserProfileModal = ({ open, onClose, user }) => {
                     }
                     if (
                       !showExamReport &&
-                      (item.step === "Exam" || item.step === "Report")
+                      (item.step === "Assessment" || item.step === "Report")
                     ) {
                       return false;
                     }

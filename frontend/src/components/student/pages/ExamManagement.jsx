@@ -107,9 +107,9 @@ const ExamManagement = () => {
       <div style={{ minHeight: "100vh" }}>
         {/* HEADER */}
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <Title level={2}>Career Assessment</Title>
+          <Title level={2}>Assessment Management</Title>
           <Text type="colorTextSecondary">
-            Discover your strengths, interests, and ideal career path
+            Discover your strengths, interests, and ideal therapy
           </Text>
         </div>
 
@@ -215,7 +215,7 @@ const ExamManagement = () => {
                   type="colorTextSecondary"
                   style={{ display: "block", marginTop: 8 }}
                 >
-                  You have successfully completed the Exam. Great job!
+                  You have successfully completed the Assessment. Great job!
                 </Text>
               )}
             </Card>
@@ -276,7 +276,7 @@ const ExamManagement = () => {
                   }}
                 >
                   <Title level={4}>
-                    Exam Details{" "}
+                    Assessment Details{" "}
                     <Tag
                       color={
                         isCompleted

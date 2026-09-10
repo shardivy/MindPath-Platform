@@ -516,7 +516,7 @@ const CollegeListAnalysis = () => {
             {/* HEADER */}
             <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
                 <Col>
-                    <Title level={3}>College List Analysis</Title>
+                    <Title level={3}>Therapy Analysis</Title>
                 </Col>
             </Row>
 

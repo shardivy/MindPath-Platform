@@ -48,15 +48,15 @@ const JourneySteps = ({
   const getJourneySteps = () => {
     let steps = [
       "Registration",
-      "Counselling Service Selection",
+      "Treatment Selection",
       "Payment",
     ];
 
     // EXAM FLOW
     if (showExamAndReport) {
       steps.push(
-        "Exam",
-        "Counselling Slot Booking",
+        "Assessment",
+        "Session Booking",
         "Review",
         "Report"
       );
@@ -67,7 +67,7 @@ const JourneySteps = ({
       steps.push(
         "Questionnaire",
         "Analysis Report",
-        "Counselling Slot Booking",
+        "Session Booking",
         "Review",
      
       );
@@ -85,11 +85,11 @@ const JourneySteps = ({
     switch (label) {
       case "Registration":
         return progressData.registration === true;
-      case "Counselling Service Selection":
+      case "Treatment Selection":
         return progressData.counselling_service === true;
       case "Payment":
         return progressData.payment === "fully_paid";
-      case "Exam":
+      case "Assessment":
         return progressData.exam === "completed";
       case "Report":
         return progressData.report === "received_unlocked";
@@ -99,7 +99,7 @@ const JourneySteps = ({
       case "Analysis Report":
         return progressData.report === "received_unlocked";
 
-      case "Counselling Slot Booking":
+      case "Session Booking":
         return (
           progressData.counselling_slot_booking === "booked" ||
           progressData.counselling_slot_booking === "rescheduled" ||
@@ -119,7 +119,7 @@ const JourneySteps = ({
   // Check if step is in progress
   const isStepInProgress = (label) => {
     switch (label) {
-      case "Exam":
+      case "Assessment":
         return progressData.exam === "in_progress";
       case "Report":
         return progressData.report === "received_locked";
@@ -129,7 +129,7 @@ const JourneySteps = ({
           progressData.payment === "not_paid" ||
           progressData.payment === "partial_paid"
         );
-      case "Counselling Slot Booking":
+      case "Session Booking":
         return progressData.counselling_slot_booking === "pending" || progressData.counselling_slot_booking === "not_booked";
       case "Questionnaire":
         return progressData.analysis === "in_progress";
@@ -189,14 +189,14 @@ const JourneySteps = ({
         case "Registration":
           navigate("/register");
           break;
-        case "Counselling Service Selection":
+        case "Treatment Selection":
           navigate("/student/program");
           break;
         case "Payment":
           navigate("/student/payments");
           break;
-        case "Exam":
-          navigate("/student/exam-management");
+        case "Assessment":
+          navigate("/student/assessment");
           break;
         case "Report":
           navigate("/student/report-management");
@@ -207,7 +207,7 @@ const JourneySteps = ({
         case "Analysis Report":
           navigate("/student/analysis-report");
           break;
-        case "Counselling Slot Booking":
+        case "Session Booking":
           navigate("/student/slot-booking");
           break;
         case "Review":
@@ -227,7 +227,7 @@ const JourneySteps = ({
     if (isStepCompleted(label)) return `${label} - Completed`;
     if (label === "Payment" && progressData.payment === "partial_paid")
       return `${label} - Partially Paid`;
-    if (label === "Exam" && progressData.exam === "in_progress")
+    if (label === "Assessment" && progressData.exam === "in_progress")
       return `${label} - In Progress`;
     if (label === "Report" && progressData.report === "received_locked")
       return `${label} - Locked`;
@@ -258,10 +258,10 @@ const JourneySteps = ({
   if (isFreeUser) {
     const freeSteps = [
       "Registration",
-      "Counselling Service Selection",
+      "Treatment Selection",
       "Payment",
-      "Exam",
-      "Counselling Slot Booking",
+      "Assessment",
+      "Session Booking",
       "Full Access",
     ];
 
