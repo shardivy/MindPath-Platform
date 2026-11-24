@@ -17,6 +17,8 @@ urlpatterns = [
     path('api/notification/', include('notification.urls')),
     path('api/activity/', include('activity.urls')),
     path('api/event/', include('event.urls')),
+    # path('api/integrations/', include('integrations.urls')),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
